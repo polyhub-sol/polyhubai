@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-ov-bg text-white antialiased;
+  background: radial-gradient(circle at 0% 0%, #1e293b 0, #020617 40%, #000 100%);
+}
+
+html,
+body {
+  height: 100%;
+}
+
