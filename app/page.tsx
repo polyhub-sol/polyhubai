@@ -17,13 +17,14 @@ export default function HomePage() {
             current market odds to a structured AI forecast. It&apos;s an
             experimental research tool, not a trading interface.
           </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/markets"
-              className="inline-flex items-center rounded-full bg-gradient-to-r from-ov-accent-soft to-ov-purple px-5 py-2 text-sm font-semibold text-black shadow-ov-glow transition-all hover:shadow-ov-glow/80 hover:scale-[1.02]"
-            >
-              Explore markets
-            </Link>
+              {/* Main call-to-action buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/markets"
+                  className="inline-flex items-center rounded-full bg-gradient-to-r from-ov-accent-soft to-ov-purple px-5 py-2 text-sm font-semibold text-black shadow-ov-glow transition-all hover:shadow-ov-glow/80 hover:scale-[1.02]"
+                >
+                  Explore markets
+                </Link>
             <span className="text-[11px] text-ov-text-muted">
               No wallet. No trades. Pure insight.
             </span>

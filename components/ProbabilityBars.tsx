@@ -28,6 +28,7 @@ export function ProbabilityBars({ aiProbabilities, marketProbabilities }: Props)
       </div>
       <div className="space-y-3">
         {labels.map((label) => {
+          // Extract probabilities for this outcome (default to 0 if not present)
           const ai = aiProbabilities[label] ?? 0;
           const mkt = marketProbabilities[label] ?? 0;
 

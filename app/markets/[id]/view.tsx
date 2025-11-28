@@ -30,6 +30,7 @@ export function MarketDetailView({ market }: Props) {
 
   const polymarketUrl = buildPolymarketUrl(market);
 
+  // Fetch AI analysis for the current market
   const runAnalysis = async () => {
     setLoading(true);
     setError(null);
