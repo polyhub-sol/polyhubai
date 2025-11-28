@@ -65,6 +65,7 @@ export function MarketCard({ market }: Props) {
             href={polymarketUrl}
             target="_blank"
             rel="noopener noreferrer"
+            title="Open this market on Polymarket"
             className="inline-flex items-center rounded-full border border-ov-border/70 bg-black/70 px-3 py-1.5 text-[10px] font-medium text-ov-text-muted hover:text-white hover:border-purple-400/80 hover:bg-black/90 transition"
           >
             <span>Polymarket</span>
