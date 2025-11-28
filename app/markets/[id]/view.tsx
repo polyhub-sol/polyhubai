@@ -35,6 +35,7 @@ export function MarketDetailView({ market }: Props) {
     setLoading(true);
     setError(null);
     try {
+      // POST request to trigger AI analysis for this market
       const res = await fetch(`/api/markets/${market.id}/ai`, {
         method: "POST",
       });

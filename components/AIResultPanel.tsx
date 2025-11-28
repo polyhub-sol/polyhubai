@@ -33,6 +33,7 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
         <h2 className="text-xs font-semibold uppercase tracking-wide text-ov-text-muted">
           AI vs Market
         </h2>
+        {/* Button to manually refresh AI analysis */}
         <button
           onClick={onRefresh}
           disabled={loading}

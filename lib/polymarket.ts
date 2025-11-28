@@ -86,6 +86,7 @@ export async function fetchMarketsFromGamma(limit = 40): Promise<MarketSummary[]
         ? String(m.events[0].slug)
         : null;
 
+    // Build MarketSummary object from Gamma API response
     return {
       id: String(m.id),
       question: m.question ?? "",

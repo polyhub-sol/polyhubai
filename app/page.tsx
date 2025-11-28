@@ -32,8 +32,9 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="flex-1">
-          <div className="relative overflow-hidden rounded-3xl border border-ov-border/70 bg-gradient-to-br from-black/80 via-ov-bg-soft/90 to-black/90 p-4 shadow-ov-soft">
+            {/* Example snapshot card showing UI preview */}
+            <div className="flex-1">
+              <div className="relative overflow-hidden rounded-3xl border border-ov-border/70 bg-gradient-to-br from-black/80 via-ov-bg-soft/90 to-black/90 p-4 shadow-ov-soft">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0,_rgba(34,211,238,0.18)_0,_transparent_50%),radial-gradient(circle_at_80%_100%,_rgba(168,85,247,0.2)_0,_transparent_50%)]" />
             <div className="relative space-y-4">
               <p className="text-xs font-semibold text-ov-text-muted">
