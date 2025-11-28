@@ -18,7 +18,7 @@ export function MarketCard({ market }: Props) {
   return (
     <motion.div
       whileHover={{ y: -4, scale: 1.01 }}
-      className="group relative flex h-full flex-col rounded-2xl border border-ov-border/80 bg-gradient-to-br from-black/80 via-ov-bg-soft/90 to-black/80 p-4 shadow-ov-soft"
+      className="group relative flex h-full flex-col rounded-2xl border border-ov-border/80 bg-gradient-to-br from-black/80 via-ov-bg-soft/90 to-black/80 p-4 shadow-ov-soft cursor-pointer"
     >
       <div className="flex items-start gap-3">
         <div className="flex flex-1 flex-col gap-1">
