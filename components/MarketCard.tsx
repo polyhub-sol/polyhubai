@@ -74,7 +74,7 @@ export function MarketCard({ market }: Props) {
           </Link>
           <Link
             href={`/markets/${encodeURIComponent(market.id)}`}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-purple-400 to-cyan-300 px-4 py-1.5 text-xs font-semibold leading-tight text-black shadow-ov-glow hover:shadow-ov-glow/60 transition-all"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-purple-400 to-cyan-300 px-4 py-1.5 text-xs font-semibold leading-tight text-black transition-all"
           >
             <span>AI View</span>
           </Link>
