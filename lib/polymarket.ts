@@ -54,6 +54,11 @@ function parseOutcomes(outcomesRaw: any, pricesRaw: any): OutcomePrice[] {
   });
 }
 
+/**
+ * Fetches active markets from Polymarket Gamma API.
+ * @param limit - Maximum number of markets to fetch (default: 40)
+ * @returns Array of market summaries sorted by volume
+ */
 export async function fetchMarketsFromGamma(limit = 40): Promise<MarketSummary[]> {
   const params = new URLSearchParams({
     limit: String(limit),
