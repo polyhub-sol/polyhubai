@@ -1,0 +1,29 @@
+warning: LF will be replaced by CRLF in README.md.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/api/markets/[id]/ai/route.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/api/markets/[id]/route.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/layout.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/markets/[id]/view.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/markets/page.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/page.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in components/AIResultPanel.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in components/MarketCard.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in components/ProbabilityBars.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in components/ReasoningFeed.tsx.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in lib/polymarket.ts.
+The file will have its original line endings in your working directory
+ app/agent-manager/page.tsx | 4 [32m++[m[31m--[m
+ app/layout.tsx             | 5 [32m+++[m[31m--[m
+ app/page.tsx               | 2 [32m+[m[31m-[m
+ components/MarketCard.tsx  | 2 [32m+[m[31m-[m
+ 4 files changed, 7 insertions(+), 6 deletions(-)

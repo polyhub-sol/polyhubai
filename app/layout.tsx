@@ -25,6 +25,7 @@ export default function RootLayout({
           </div>
 
           {/* Navbar */}
+          {/* Navbar header */}
           <header className="relative z-20 border-b border-ov-border/70 bg-gradient-to-b from-black/60 via-black/40 to-transparent backdrop-blur">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
               <Link href="/" className="flex items-center gap-2">
@@ -44,13 +45,13 @@ export default function RootLayout({
               <nav className="flex items-center gap-3 text-xs font-medium">
                 <Link
                   href="/markets"
-                  className="rounded-full border border-ov-border/80 bg-black/40 px-3 py-1.5 text-xs text-ov-text-muted hover:border-ov-accent hover:text-white hover:shadow-ov-glow transition-all"
+                  className="rounded-full border border-ov-border/70 bg-black/40 px-3 py-1.5 text-xs text-ov-text-muted hover:border-ov-accent hover:text-white hover:shadow-ov-glow transition-all"
                 >
                   Markets
                 </Link>
                 <Link
                   href="/agent-manager"
-                  className="rounded-full border border-ov-border/80 bg-black/40 px-3 py-1.5 text-xs text-ov-text-muted hover:border-ov-accent hover:text-white hover:shadow-ov-glow transition-all"
+                  className="rounded-full border border-ov-border/70 bg-black/40 px-3 py-1.5 text-xs text-ov-text-muted hover:border-ov-accent hover:text-white hover:shadow-ov-glow transition-all"
                 >
                   Agent Manager
                 </Link>
