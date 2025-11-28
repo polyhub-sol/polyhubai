@@ -23,7 +23,7 @@ export default function AgentManagerPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-[11px]">
               <thead>
-                <tr className="border-b border-ov-border/60 text-ov-text-muted">
+                <tr className="border-b border-ov-border/50 text-ov-text-muted">
                   <th className="px-4 py-3 text-left font-semibold">Market</th>
                   <th className="px-4 py-3 text-left font-semibold">Outcome</th>
                   <th className="px-4 py-3 text-left font-semibold">Type</th>
@@ -33,7 +33,7 @@ export default function AgentManagerPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-ov-border/30 text-ov-text-muted">
+                <tr className="border-b border-ov-border/25 text-ov-text-muted">
                   <td colSpan={6} className="px-4 py-8 text-center">
                     <div className="flex flex-col items-center gap-2">
                       <svg
