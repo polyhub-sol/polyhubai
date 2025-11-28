@@ -21,6 +21,11 @@ function normalizeMarketProbabilities(
   );
 }
 
+/**
+ * POST /api/markets/[id]/ai
+ * Generates AI analysis for a market using OpenAI.
+ * Returns probabilities, reasoning, bullet points, and sources.
+ */
 export async function POST(_: Request, { params }: Params) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
