@@ -61,7 +61,7 @@ export function MarketDetailView({ market }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 rounded-2xl border border-ov-border/70 bg-black/60 p-4 shadow-ov-soft">
+      <div className="space-y-2 rounded-2xl border border-ov-border/60 bg-black/60 p-4 shadow-ov-soft">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2 text-[11px] text-ov-text-muted">
             <span className="rounded-full border border-ov-border/70 bg-black/60 px-2 py-0.5">

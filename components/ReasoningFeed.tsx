@@ -12,7 +12,7 @@ type Props = {
  */
 export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
   return (
-    <div className="space-y-3 rounded-2xl border border-ov-border/60 bg-black/60 p-4">
+      <div className="space-y-3 rounded-2xl border border-ov-border/50 bg-black/60 p-4">
       <h3 className="text-xs font-semibold text-ov-text-muted uppercase tracking-wide">
         AI reasoning
       </h3>
