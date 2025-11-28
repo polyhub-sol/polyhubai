@@ -19,6 +19,10 @@ type Props = {
   market: MarketSummary;
 };
 
+/**
+ * Client component that displays market details with AI analysis comparison.
+ * Automatically fetches and displays AI probabilities vs market odds.
+ */
 export function MarketDetailView({ market }: Props) {
   const [analysis, setAnalysis] = useState<AiAnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
