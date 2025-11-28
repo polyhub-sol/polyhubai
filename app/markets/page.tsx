@@ -7,7 +7,7 @@ export default async function MarketsPage() {
   const markets = await fetchMarketsFromGamma(40);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6">
+    <div className="mx-auto max-w-6xl px-4 py-5">
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
           <h1 className="text-lg font-semibold tracking-tight">Markets</h1>
