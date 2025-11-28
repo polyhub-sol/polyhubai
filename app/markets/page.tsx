@@ -16,7 +16,7 @@ export default async function MarketsPage() {
             Live questions from Polymarket Gamma. Sorted roughly by volume.
           </p>
         </div>
-        <p className="text-[10px] text-ov-text-muted">
+        <p className="text-[10px] text-ov-text-muted/85">
           Research UI only. Trading and wallet features coming soon.
         </p>
       </div>

@@ -46,7 +46,7 @@ export function ProbabilityBars({ aiProbabilities, marketProbabilities }: Props)
                 </div>
               </div>
               {/* AI probability bar with spring animation */}
-              <div className="relative h-3 overflow-hidden rounded-full bg-slate-900/70">
+              <div className="relative h-3 overflow-hidden rounded-full bg-slate-900/60">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.min(ai, 1) * 100}%` }}
