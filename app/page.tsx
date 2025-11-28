@@ -12,11 +12,12 @@ export default function HomePage() {
               the crowd or the model?
             </span>
           </h1>
-          <p className="max-w-xl text-sm leading-relaxed text-ov-text-muted">
-            PolyHubAI lets you explore live Polymarket questions and compare
-            current market odds to a structured AI forecast. It&apos;s an
-            experimental research tool, not a trading interface.
-          </p>
+              {/* Hero description */}
+              <p className="max-w-xl text-sm leading-relaxed text-ov-text-muted">
+                PolyHubAI lets you explore live Polymarket questions and compare
+                current market odds to a structured AI forecast. It&apos;s an
+                experimental research tool, not a trading interface.
+              </p>
               {/* Main call-to-action buttons */}
               <div className="flex flex-wrap items-center gap-3">
                 <Link

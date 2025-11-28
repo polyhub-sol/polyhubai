@@ -126,19 +126,19 @@ export async function fetchMarketByIdFromGamma(
 export function buildPolymarketUrl(market: MarketSummary): string {
   const base = "https://polymarket.com";
 
-  // Prefer the EVENT slug; MarketSummary.slug now carries that.
+  // Priority 1: Use event slug (most reliable, works for sports markets)
   if (market.slug && market.slug.trim().length > 0) {
     return `${base}/event/${market.slug}`;
   }
 
-  // Optional extra fallback: if for some reason slug is missing but we still
-  // have a marketSlug, try that. This may 404 for some sports markets, but
-  // it's better than nothing.
+  // Priority 2: Fall back to market slug if event slug unavailable
+  // Note: may 404 for some sports markets, but better than nothing
   if (market.marketSlug && market.marketSlug.trim().length > 0) {
     return `${base}/event/${market.marketSlug}`;
   }
 
-  // Final fallback: search by question text so the user still lands somewhere useful.
+  // Priority 3: Final fallback - search by question text
+  // Ensures user always lands somewhere useful on Polymarket
   const query = encodeURIComponent(market.question.trim());
   return `${base}/search?q=${query}`;
 }
