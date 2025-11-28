@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <div className="relative">
-      {/* HERO */}
+      {/* Hero Section: Main landing page content */}
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-10 md:flex-row md:items-center">
         <div className="flex-1 space-y-6">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
