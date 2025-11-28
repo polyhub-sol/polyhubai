@@ -103,6 +103,11 @@ export async function fetchMarketsFromGamma(limit = 40): Promise<MarketSummary[]
   });
 }
 
+/**
+ * Fetches a single market by ID from Polymarket Gamma API.
+ * @param id - Market ID to fetch
+ * @returns Market summary or null if not found
+ */
 export async function fetchMarketByIdFromGamma(
   id: string
 ): Promise<MarketSummary | null> {
