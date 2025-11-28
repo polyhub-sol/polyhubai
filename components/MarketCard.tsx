@@ -27,6 +27,7 @@ export function MarketCard({ market }: Props) {
             <span className="inline-flex items-center rounded-full border border-ov-border/80 bg-black/60 px-2.5 py-0.5 text-[10px] uppercase tracking-wide text-ov-text-muted">
               {market.category || "Misc"}
             </span>
+            {/* Display the current market favorite outcome and its probability */}
             {bestOutcome && (
               <span className="inline-flex items-center rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-300">
                 Market: {bestOutcome.label} ·{" "}

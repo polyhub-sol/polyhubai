@@ -101,7 +101,10 @@ export async function POST(_: Request, { params }: Params) {
   const reasoning = data.reasoning ?? "No reasoning provided.";
   const sources_raw = data.sources ?? [];
 
+  // Extract valid outcome labels from the market
   const labels = market.outcomes.map((o) => o.label);
+  
+  // Clean and validate AI probabilities: filter invalid labels and non-numeric values
   const aiClean: Record<string, number> = {};
   for (const [label, value] of Object.entries(ai_probs_raw)) {
     if (!labels.includes(label)) continue;
@@ -110,6 +113,8 @@ export async function POST(_: Request, { params }: Params) {
     aiClean[label] = v;
   }
 
+  // Normalize AI probabilities to sum to 1.0
+  // If total is zero or negative, fall back to market probabilities as a safe default
   let total = Object.values(aiClean).reduce((sum, v) => sum + v, 0);
   if (total <= 0) {
     Object.assign(aiClean, marketProbs);

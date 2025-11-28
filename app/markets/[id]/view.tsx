@@ -99,14 +99,15 @@ export function MarketDetailView({ market }: Props) {
           {market.question}
         </h1>
 
-        {bestOutcome && (
-          <p className="text-[12px] text-ov-text-muted">
-            Current market favorite:{" "}
-            <span className="font-semibold text-purple-300">
-              {bestOutcome.label} · {(bestOutcome.price * 100).toFixed(1)}%
-            </span>
-          </p>
-        )}
+            {/* Show the outcome with the highest current market probability */}
+            {bestOutcome && (
+              <p className="text-[12px] text-ov-text-muted">
+                Current market favorite:{" "}
+                <span className="font-semibold text-purple-300">
+                  {bestOutcome.label} · {(bestOutcome.price * 100).toFixed(1)}%
+                </span>
+              </p>
+            )}
       </div>
 
       <AIResultPanel
