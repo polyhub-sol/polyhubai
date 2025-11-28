@@ -12,6 +12,7 @@ type Props = {
  * Uses Framer Motion for smooth animations.
  */
 export function ProbabilityBars({ aiProbabilities, marketProbabilities }: Props) {
+  // Collect unique outcome labels from both AI and market probability sets
   const labels = Array.from(
     new Set([...Object.keys(aiProbabilities), ...Object.keys(marketProbabilities)])
   );
