@@ -18,7 +18,7 @@ export function ProbabilityBars({ aiProbabilities, marketProbabilities }: Props)
   );
 
   return (
-    <div className="space-y-3 rounded-2xl border border-ov-border/70 bg-black/60 p-4">
+    <div className="space-y-3 rounded-2xl border border-ov-border/60 bg-black/60 p-4">
       <div className="flex items-center justify-between text-xs font-semibold text-ov-text-muted">
         <span>Outcome</span>
         <div className="flex gap-4 text-[10px]">
