@@ -55,6 +55,7 @@ export function MarketDetailView({ market }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [market.id]);
 
+  // Find the outcome with the highest market probability
   const bestOutcome =
     [...market.outcomes].sort((a, b) => b.price - a.price)[0] || null;
 
