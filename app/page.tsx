@@ -65,7 +65,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* COMING SOON STRIP */}
+      {/* Coming Soon Section: Describes upcoming features like embedded wallets and auto-trading */}
       <section className="border-t border-ov-border/60 bg-black/40">
         <div className="mx-auto max-w-6xl px-4 py-8">
           <div className="relative overflow-hidden rounded-3xl border border-ov-border/80 bg-gradient-to-br from-black/85 via-ov-bg-soft/95 to-black/90 p-5 shadow-ov-soft">
