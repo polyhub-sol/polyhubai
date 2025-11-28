@@ -16,7 +16,7 @@ export default async function MarketsPage() {
           </p>
         </div>
         <p className="text-[10px] text-ov-text-muted">
-          This is a research UI. It does not submit orders or manage wallets.
+          Research UI only. Trading and wallet features coming soon.
         </p>
       </div>
 
