@@ -7,6 +7,10 @@ type Props = {
   marketProbabilities: Record<string, number>;
 };
 
+/**
+ * Renders animated probability bars comparing AI vs market probabilities for each outcome.
+ * Uses Framer Motion for smooth animations.
+ */
 export function ProbabilityBars({ aiProbabilities, marketProbabilities }: Props) {
   const labels = Array.from(
     new Set([...Object.keys(aiProbabilities), ...Object.keys(marketProbabilities)])
