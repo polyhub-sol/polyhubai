@@ -20,7 +20,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/markets"
-              className="inline-flex items-center rounded-full bg-gradient-to-r from-ov-accent-soft to-ov-purple px-5 py-2 text-sm font-semibold text-black shadow-ov-glow transition-all hover:shadow-ov-glow/80"
+              className="inline-flex items-center rounded-full bg-gradient-to-r from-ov-accent-soft to-ov-purple px-5 py-2 text-sm font-semibold text-black shadow-ov-glow transition-all hover:shadow-ov-glow/80 hover:scale-[1.02]"
             >
               Explore markets
             </Link>
