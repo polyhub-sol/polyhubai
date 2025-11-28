@@ -6,6 +6,10 @@ type Props = {
   sources: { title: string; url: string }[];
 };
 
+/**
+ * Displays AI reasoning text, bullet points, and optional source links.
+ * Used to show the AI's explanation for its probability forecasts.
+ */
 export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
   return (
     <div className="space-y-3 rounded-2xl border border-ov-border/70 bg-black/60 p-4">
