@@ -1,6 +1,6 @@
 # PolyHubAI
 
-A read-only "AI vs Market" explorer for Polymarket. Compare AI-generated probabilities with live market odds.
+An AI-powered prediction market explorer for Polymarket. Compare AI-generated probabilities with live market odds.
 
 ## Setup
 
