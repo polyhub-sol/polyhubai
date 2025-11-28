@@ -85,6 +85,7 @@ export function MarketDetailView({ market }: Props) {
             href={polymarketUrl}
             target="_blank"
             rel="noopener noreferrer"
+            title="Open this market on Polymarket"
             className="inline-flex items-center gap-1 rounded-full border border-ov-border/70 bg-white/90 px-3 py-1 text-[11px] font-medium text-black transition hover:bg-white shadow-ov-soft hover:shadow-ov-glow/50"
           >
             <span>Open on Polymarket</span>
