@@ -46,6 +46,7 @@ export async function POST(_: Request, { params }: Params) {
     apiKey,
   });
 
+  // Normalize market probabilities so they sum to ~1.0 for comparison with AI probabilities
   const marketProbs = normalizeMarketProbabilities(market.outcomes);
 
   const messages = [
