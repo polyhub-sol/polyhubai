@@ -24,7 +24,7 @@ export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
         </ul>
       )}
       {sources.length > 0 && (
-        <div className="mt-3 border-t border-ov-border/60 pt-2">
+        <div className="mt-3 border-t border-ov-border/55 pt-2">
           <h4 className="mb-1 text-[11px] font-semibold text-ov-text-muted uppercase tracking-wide">
             Sources (declared by model)
           </h4>

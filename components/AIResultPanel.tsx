@@ -65,7 +65,7 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
               />
             </>
           ) : (
-            <div className="rounded-2xl border border-dashed border-ov-border/50 bg-black/40 p-4 text-sm text-ov-text-muted">
+            <div className="rounded-2xl border border-dashed border-ov-border/55 bg-black/40 p-4 text-sm text-ov-text-muted">
           Click &ldquo;Re-run AI view&rdquo; to generate an AI forecast and
           compare it to the current market odds.
         </div>

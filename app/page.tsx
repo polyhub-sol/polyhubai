@@ -80,7 +80,7 @@ export default function HomePage() {
             <div className="relative flex flex-col gap-6 md:flex-row md:items-center">
               {/* Left: copy */}
               <div className="flex-1 space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full border border-ov-border/70 bg-black/70 px-3 py-1">
+                <div className="inline-flex items-center gap-2 rounded-full border border-ov-border/65 bg-black/65 px-3 py-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-amber-300">
                     Coming soon · PolyHubAI upgrades
@@ -139,7 +139,7 @@ export default function HomePage() {
 
               {/* Right: tiny roadmap */}
               <div className="flex-1 md:max-w-xs">
-                <div className="space-y-3 rounded-2xl border border-ov-border/70 bg-black/80 p-4">
+                <div className="space-y-3 rounded-2xl border border-ov-border/65 bg-black/80 p-4">
                   <p className="text-[11px] font-semibold text-ov-text-muted uppercase tracking-wide">
                     Upgrade roadmap
                   </p>

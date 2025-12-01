@@ -10,7 +10,7 @@ export default function AgentManagerPage() {
 
       <div className="space-y-6">
         {/* Orders Section */}
-        <div className="rounded-2xl border border-ov-border/60 bg-black/60 p-6 shadow-ov-soft">
+        <div className="rounded-2xl border border-ov-border/55 bg-black/55 p-6 shadow-ov-soft">
           <div className="mb-4 flex items-center justify-between">
             <div>
               <h2 className="text-sm font-semibold tracking-tight">Orders</h2>
@@ -64,7 +64,7 @@ export default function AgentManagerPage() {
         </div>
 
         {/* Agent Management Section */}
-        <div className="rounded-2xl border border-ov-border/60 bg-black/60 p-6 shadow-ov-soft">
+        <div className="rounded-2xl border border-ov-border/55 bg-black/55 p-6 shadow-ov-soft">
           <div className="mb-4">
             <h2 className="text-sm font-semibold tracking-tight">
               AI Trading Agents
