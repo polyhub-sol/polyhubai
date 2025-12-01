@@ -8,7 +8,7 @@ type Props = {
 
 export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
   return (
-    <div className="space-y-3 rounded-2xl border border-ov-border/65 bg-black/60 p-4">
+    <div className="space-y-3 rounded-2xl border border-ov-border/60 bg-black/60 p-4">
       <h3 className="text-xs font-semibold text-ov-text-muted/95 uppercase tracking-wide">
         AI reasoning
       </h3>
@@ -24,7 +24,7 @@ export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
         </ul>
       )}
       {sources.length > 0 && (
-        <div className="mt-3 border-t border-ov-border/55 pt-2">
+        <div className="mt-3 border-t border-ov-border/50 pt-2">
           <h4 className="mb-1 text-[11px] font-semibold text-ov-text-muted uppercase tracking-wide">
             Sources (declared by model)
           </h4>

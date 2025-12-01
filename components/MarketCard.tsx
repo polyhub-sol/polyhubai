@@ -25,7 +25,7 @@ export function MarketCard({ market }: Props) {
       <div className="flex items-start gap-3">
         <div className="flex flex-1 flex-col gap-1">
           <div className="flex items-center justify-between gap-2">
-            <span className="inline-flex items-center rounded-full border border-ov-border/65 bg-black/45 px-2.5 py-0.5 text-[10px] uppercase tracking-wide text-ov-text-muted">
+            <span className="inline-flex items-center rounded-full border border-ov-border/60 bg-black/45 px-2.5 py-0.5 text-[10px] uppercase tracking-wide text-ov-text-muted">
               {market.category || "Misc"}
             </span>
             {/* Display the current market favorite outcome and its probability */}
@@ -45,12 +45,12 @@ export function MarketCard({ market }: Props) {
       {/* Market metadata: end date and trading volume */}
       <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] text-ov-text-muted">
         {market.end_date && (
-          <span className="rounded-full border border-ov-border/55 bg-black/40 px-2 py-0.5">
+          <span className="rounded-full border border-ov-border/50 bg-black/40 px-2 py-0.5">
             Ends: {new Date(market.end_date).toLocaleDateString()}
           </span>
         )}
         {market.volume != null && (
-          <span className="rounded-full border border-ov-border/55 bg-black/40 px-2 py-0.5">
+          <span className="rounded-full border border-ov-border/50 bg-black/40 px-2 py-0.5">
             Volume: $
             {market.volume.toLocaleString(undefined, {
               maximumFractionDigits: 0,
@@ -71,7 +71,7 @@ export function MarketCard({ market }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             title="Open this market on Polymarket"
-            className="inline-flex items-center rounded-full border border-ov-border/60 bg-black/70 px-3 py-1.5 text-[10px] font-medium text-ov-text-muted hover:text-white hover:border-purple-400/70 hover:bg-black/90 transition-all"
+            className="inline-flex items-center rounded-full border border-ov-border/55 bg-black/70 px-3 py-1.5 text-[10px] font-medium text-ov-text-muted hover:text-white hover:border-purple-400/65 hover:bg-black/90 transition-all"
           >
             <span>Polymarket</span>
             <span aria-hidden className="ml-1 text-[10px]">
