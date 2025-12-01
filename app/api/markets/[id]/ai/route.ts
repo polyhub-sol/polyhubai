@@ -23,8 +23,18 @@ function normalizeMarketProbabilities(
 
 /**
  * POST /api/markets/[id]/ai
- * Generates AI analysis for a market using OpenAI.
- * Returns probabilities, reasoning, bullet points, and sources.
+ * Generates AI analysis for a market using OpenAI GPT models.
+ * 
+ * This endpoint:
+ * - Normalizes market probabilities to sum to 1.0
+ * - Sends market context to OpenAI with structured prompt
+ * - Validates and normalizes AI response probabilities
+ * - Calculates edge (difference between AI and market probabilities)
+ * 
+ * Returns probabilities, reasoning, bullet points, and optional sources.
+ * 
+ * @param params - Route params containing market ID
+ * @returns JSON response with AI analysis or error message
  */
 export async function POST(_: Request, { params }: Params) {
   const apiKey = process.env.OPENAI_API_KEY;

@@ -9,7 +9,14 @@ type Props = {
 
 /**
  * Renders animated probability bars comparing AI vs market probabilities for each outcome.
- * Uses Framer Motion for smooth animations.
+ * 
+ * Features:
+ * - Side-by-side comparison bars with spring animations
+ * - Color-coded: cyan for AI forecasts, purple for market odds
+ * - Shows percentage values for both AI and market probabilities
+ * - Automatically handles missing probabilities (defaults to 0)
+ * 
+ * Uses Framer Motion for smooth, physics-based animations on load.
  */
 export function ProbabilityBars({ aiProbabilities, marketProbabilities }: Props) {
   // Collect unique outcome labels from both AI and market probability sets

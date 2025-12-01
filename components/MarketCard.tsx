@@ -9,8 +9,13 @@ type Props = {
   market: MarketSummary;
 };
 
+/**
+ * Market card component displaying market question, current favorite outcome, and action buttons.
+ * Shows category, best outcome probability, metadata (end date, volume), and links to view details or Polymarket.
+ */
 export function MarketCard({ market }: Props) {
-  // Find the outcome with the highest market probability
+  // Sort outcomes by price (probability) descending and take the highest
+  // This represents the current market favorite
   const bestOutcome =
     [...market.outcomes].sort((a, b) => b.price - a.price)[0] || null;
 
@@ -62,8 +67,7 @@ export function MarketCard({ market }: Props) {
       {/* Action buttons section */}
       <div className="mt-4 flex items-center justify-between gap-2">
         <p className="text-[11px] text-ov-text-muted">
-          Click to see AI probabilities vs the market, or open the original on
-          Polymarket.
+          View AI forecast comparison or open on Polymarket
         </p>
         <div className="flex items-center gap-2">
           <Link

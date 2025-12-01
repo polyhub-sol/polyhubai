@@ -14,9 +14,7 @@ export default function HomePage() {
           </h1>
               {/* Hero description */}
               <p className="max-w-xl text-sm leading-relaxed text-ov-text-muted">
-                PolyHubAI lets you explore live Polymarket questions and compare
-                current market odds to a structured AI forecast. It&apos;s an
-                experimental research tool, not a trading interface.
+                Compare live Polymarket odds against AI-generated probability forecasts. Discover where artificial intelligence and collective market wisdom diverge.
               </p>
               {/* Main call-to-action buttons */}
               <div className="flex flex-wrap items-center gap-3">

@@ -128,9 +128,7 @@ export function MarketDetailView({ market }: Props) {
 
           {/* Disclaimer about AI-generated data */}
           <p className="text-[10px] text-ov-text-muted/85">
-            PolyHubAI uses AI to generate probabilities and explanations. This may
-            be inaccurate or outdated relative to Polymarket&apos;s live markets.
-            Do not rely on this data for actual trades.
+            ⚠️ AI forecasts are experimental and may be inaccurate. Always verify data independently. Not financial advice.
           </p>
     </div>
   );
