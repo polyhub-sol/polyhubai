@@ -13,7 +13,7 @@ type Props = {
 export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
   return (
       <div className="space-y-3 rounded-2xl border border-ov-border/50 bg-black/55 p-4">
-      <h3 className="text-xs font-semibold text-ov-text-muted uppercase tracking-wide">
+      <h3 className="text-xs font-semibold text-ov-text-muted/90 uppercase tracking-wide">
         AI reasoning
       </h3>
       {/* Main reasoning paragraph from the AI */}
@@ -33,9 +33,9 @@ export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
       {sources.length > 0 && (
         <div className="mt-3 border-t border-ov-border/50 pt-2">
           {/* Sources section - optional links provided by the AI */}
-          <h4 className="mb-1 text-[11px] font-semibold text-ov-text-muted uppercase tracking-wide">
-            Sources (declared by model)
-          </h4>
+            <h4 className="mb-1 text-[11px] font-semibold text-ov-text-muted/90 uppercase tracking-wide">
+              Sources (declared by model)
+            </h4>
           <ul className="space-y-1 text-[11px] text-ov-text-muted">
             {sources.map((s, i) => (
               <li key={i} className="truncate">

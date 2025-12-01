@@ -30,7 +30,7 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between gap-2">
-        <h2 className="text-xs font-semibold uppercase tracking-wide text-ov-text-muted">
+        <h2 className="text-xs font-semibold uppercase tracking-wide text-ov-text-muted/90">
           AI vs Market
         </h2>
         {/* Button to manually refresh AI analysis */}
@@ -38,7 +38,7 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
           onClick={onRefresh}
           disabled={loading}
           title="Recompute AI forecast for this market"
-          className="inline-flex items-center gap-1 rounded-full border border-ov-border/55 bg-black/60 px-3 py-1.5 text-[11px] font-medium text-ov-text-muted hover:border-ov-accent hover:text-white disabled:opacity-50 transition-all duration-150"
+          className="inline-flex items-center gap-1 rounded-full border border-ov-border/60 bg-black/60 px-3 py-1.5 text-[11px] font-medium text-ov-text-muted hover:border-ov-accent hover:text-white disabled:opacity-50 transition-all duration-200"
         >
           {loading ? (
             <span className="inline-flex items-center gap-1">
@@ -65,7 +65,7 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
               />
             </>
           ) : (
-            <div className="rounded-2xl border border-dashed border-ov-border/45 bg-black/35 p-4 text-sm text-ov-text-muted">
+            <div className="rounded-2xl border border-dashed border-ov-border/50 bg-black/40 p-4 text-sm text-ov-text-muted">
           Click &ldquo;Re-run AI view&rdquo; to generate an AI forecast and
           compare it to the current market odds.
         </div>

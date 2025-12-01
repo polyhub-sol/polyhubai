@@ -64,7 +64,7 @@ export function MarketDetailView({ market }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 rounded-2xl border border-ov-border/55 bg-black/55 p-4 shadow-ov-soft">
+      <div className="space-y-2 rounded-2xl border border-ov-border/60 bg-black/60 p-4 shadow-ov-soft">
         {/* Market metadata badges */}
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2 text-[11px] text-ov-text-muted">
@@ -127,7 +127,7 @@ export function MarketDetailView({ market }: Props) {
           )}
 
           {/* Disclaimer about AI-generated data */}
-          <p className="text-[10px] text-ov-text-muted">
+          <p className="text-[10px] text-ov-text-muted/85">
             PolyHubAI uses AI to generate probabilities and explanations. This may
             be inaccurate or outdated relative to Polymarket&apos;s live markets.
             Do not rely on this data for actual trades.
