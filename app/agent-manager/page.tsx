@@ -74,7 +74,7 @@ export default function AgentManagerPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-dashed border-ov-border/50 bg-black/35 p-8 text-center">
+          <div className="rounded-xl border border-dashed border-ov-border/55 bg-black/40 p-8 text-center">
             <svg
               className="mx-auto h-10 w-10 text-ov-text-muted/50"
               fill="none"

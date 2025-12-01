@@ -68,16 +68,16 @@ export function MarketDetailView({ market }: Props) {
         {/* Market metadata badges */}
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2 text-[11px] text-ov-text-muted">
-            <span className="rounded-full border border-ov-border/60 bg-black/50 px-2 py-0.5">
+            <span className="rounded-full border border-ov-border/55 bg-black/45 px-2 py-0.5">
               {market.category || "Misc"}
             </span>
             {market.end_date && (
-              <span className="rounded-full border border-ov-border/60 bg-black/50 px-2 py-0.5">
+              <span className="rounded-full border border-ov-border/55 bg-black/45 px-2 py-0.5">
                 Ends: {new Date(market.end_date).toLocaleString()}
               </span>
             )}
             {market.volume != null && (
-              <span className="rounded-full border border-ov-border/60 bg-black/50 px-2 py-0.5">
+              <span className="rounded-full border border-ov-border/55 bg-black/45 px-2 py-0.5">
                 Volume: $
                 {market.volume.toLocaleString(undefined, {
                   maximumFractionDigits: 0,
@@ -91,7 +91,7 @@ export function MarketDetailView({ market }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             title="Open this market on Polymarket"
-            className="inline-flex items-center gap-1 rounded-full border border-ov-border/55 bg-white/95 px-3 py-1 text-[11px] font-medium text-black transition-all hover:bg-white shadow-ov-soft/90 hover:shadow-ov-glow/55"
+            className="inline-flex items-center gap-1 rounded-full border border-ov-border/60 bg-white/95 px-3 py-1 text-[11px] font-medium text-black transition-all hover:bg-white shadow-ov-soft hover:shadow-ov-glow/60"
           >
             <span>Open on Polymarket</span>
             <span aria-hidden>↗</span>

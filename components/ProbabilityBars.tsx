@@ -35,7 +35,7 @@ export function ProbabilityBars({ aiProbabilities, marketProbabilities }: Props)
           return (
             <div key={label} className="space-y-1">
               <div className="flex items-center justify-between text-[11px]">
-                <span className="text-ov-text-muted/95">{label}</span>
+                <span className="text-ov-text-muted">{label}</span>
                 <div className="flex gap-3 text-[10px]">
                   <span className="text-cyan-300/90">
                     AI {Math.round(ai * 100)}%
