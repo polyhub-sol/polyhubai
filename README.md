@@ -21,7 +21,6 @@ PolyHubAI is an AI-powered prediction market explorer that enables you to compar
 ### 🎨 Polished Experience
 - **Dark Trading UI**: Professional, crypto-native interface with gradient accents
 - **Animated Transitions**: Smooth Framer Motion animations on cards and probability bars
-- **Responsive Design**: Beautiful on desktop, tablet, and mobile
 - **Fast & Lightweight**: Optimized Next.js 14 with server-side rendering
 
 ### 🛡️ Safe & Secure
