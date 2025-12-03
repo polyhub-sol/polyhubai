@@ -17,7 +17,7 @@ export default async function MarketsPage() {
           </p>
         </div>
         <p className="text-[10px] text-ov-text-muted">
-          Research UI only. Trading and wallet features coming soon.
+          Read-only research tool. Trading features coming soon.
         </p>
       </div>
 
