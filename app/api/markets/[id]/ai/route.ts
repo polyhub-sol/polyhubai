@@ -8,6 +8,13 @@ type Params = { params: { id: string } };
  * Normalizes outcome prices to probabilities that sum to 1.0.
  * Handles edge cases where prices sum to zero by distributing evenly.
  */
+/**
+ * Normalizes market outcome prices to probabilities that sum to 1.0.
+ * Handles edge cases where total is zero by distributing evenly across all outcomes.
+ * 
+ * @param outcomes - Array of market outcomes with label and price
+ * @returns Record mapping outcome labels to normalized probabilities (0-1)
+ */
 function normalizeMarketProbabilities(
   outcomes: { label: string; price: number }[]
 ) {
