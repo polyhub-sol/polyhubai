@@ -1,14 +1,16 @@
 export default function AgentManagerPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6">
-      <div className="mb-6">
-        <h1 className="text-lg font-semibold tracking-tight">Agent Manager</h1>
-            <p className="text-[11px] text-ov-text-muted/90 mt-1">
-              Manage and configure your AI trading agents
-            </p>
-      </div>
+    <div className="relative mx-auto max-w-6xl px-4 py-6">
+      {/* Blurred content */}
+      <div className="blur-sm pointer-events-none select-none">
+        <div className="mb-6">
+          <h1 className="text-lg font-semibold tracking-tight">Agent Manager</h1>
+          <p className="text-[11px] text-ov-text-muted/90 mt-1">
+            Manage and configure your AI trading agents
+          </p>
+        </div>
 
-      <div className="space-y-6">
+        <div className="space-y-6">
         {/* Orders Section */}
         <div className="rounded-2xl border border-ov-border/55 bg-black/55 p-6 shadow-ov-soft">
           <div className="mb-4 flex items-center justify-between">
@@ -95,6 +97,54 @@ export default function AgentManagerPage() {
               Configure agents to automatically execute trades based on AI vs market
               edge analysis
             </p>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      {/* Coming Soon Overlay */}
+      <div className="absolute inset-0 z-50 flex items-center justify-center">
+        <div className="mx-auto max-w-md px-4">
+          <div className="rounded-2xl border border-ov-border/75 bg-black/90 backdrop-blur-xl p-8 shadow-ov-glow text-center">
+            <div className="mb-4 flex justify-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-ov-accent-soft to-ov-purple shadow-ov-glow">
+                <svg
+                  className="h-8 w-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h2 className="mb-2 text-xl font-semibold tracking-tight text-white">
+              Coming Soon
+            </h2>
+            <p className="text-sm text-ov-text-muted">
+              Agent Manager is currently under development. Check back soon for automated trading agents and advanced configuration options.
+            </p>
+            <div className="mt-6 flex items-center justify-center gap-2 text-[10px] text-ov-text-muted/70">
+              <svg
+                className="h-3.5 w-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Stay tuned for updates</span>
+            </div>
           </div>
         </div>
       </div>
