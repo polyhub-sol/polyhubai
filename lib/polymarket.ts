@@ -121,8 +121,15 @@ export async function fetchMarketByIdFromGamma(
 }
 
 /**
- * Builds a Polymarket URL for a given market.
- * Uses event slug if available, otherwise falls back to market slug or search query.
+ * Constructs a Polymarket URL for a given market with intelligent fallback logic.
+ * 
+ * URL priority:
+ * 1. Event slug (most reliable, works correctly for sports markets)
+ * 2. Market slug (fallback if event slug unavailable)
+ * 3. Search query (final fallback using market question text)
+ * 
+ * @param market - The MarketSummary object containing slug information
+ * @returns A fully-formed URL string pointing to the market on Polymarket.com
  */
 export function buildPolymarketUrl(market: MarketSummary): string {
   const base = "https://polymarket.com";
