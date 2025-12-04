@@ -109,9 +109,13 @@ export async function fetchMarketsFromGamma(limit = 40): Promise<MarketSummary[]
 }
 
 /**
- * Fetches a single market by ID from Polymarket Gamma API.
- * @param id - Market ID to fetch
- * @returns Market summary or null if not found
+ * Fetches a single market by its unique ID from the Polymarket Gamma API.
+ * 
+ * Note: This function currently fetches up to 200 markets and searches for the matching ID.
+ * For production use, consider implementing a direct API endpoint lookup if available.
+ * 
+ * @param id - The unique market identifier from Polymarket
+ * @returns Market summary object with full details, or null if market doesn't exist
  */
 export async function fetchMarketByIdFromGamma(
   id: string
