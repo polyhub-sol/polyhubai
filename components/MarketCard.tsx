@@ -84,6 +84,7 @@ export function MarketCard({ market }: Props) {
           </Link>
           <Link
             href={`/markets/${encodeURIComponent(market.id)}`}
+            aria-label={`View AI analysis for ${market.question}`}
             className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-purple-400 to-cyan-300 px-4 py-1.5 text-xs font-semibold leading-tight text-black transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
             <span>AI View</span>
