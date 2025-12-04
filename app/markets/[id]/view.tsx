@@ -52,7 +52,8 @@ export function MarketDetailView({ market }: Props) {
     }
   };
 
-  // Automatically fetch AI analysis when the market changes
+  // Automatically fetch AI analysis when the market ID changes
+  // This triggers whenever user navigates to a different market detail page
   useEffect(() => {
     runAnalysis();
     // eslint-disable-next-line react-hooks/exhaustive-deps
