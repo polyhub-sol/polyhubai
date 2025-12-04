@@ -33,11 +33,11 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
         <h2 className="text-xs font-semibold uppercase tracking-wide text-ov-text-muted">
           AI vs Market
         </h2>
-        {/* Button to manually refresh AI analysis */}
+        {/* Button to manually refresh AI analysis - triggers new OpenAI API call */}
         <button
           onClick={onRefresh}
           disabled={loading}
-          title="Recompute AI forecast for this market"
+          title="Generate new AI forecast for this market"
           className="inline-flex items-center gap-1 rounded-full border border-ov-border/60 bg-black/60 px-3 py-1.5 text-[11px] font-medium text-ov-text-muted hover:border-ov-accent hover:text-white disabled:opacity-50 transition-all duration-150"
         >
           {loading ? (
