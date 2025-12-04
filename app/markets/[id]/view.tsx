@@ -122,8 +122,8 @@ export function MarketDetailView({ market }: Props) {
 
           {/* Display error message if AI analysis fails */}
           {error && (
-            <div className="rounded-2xl border border-red-500/40 bg-red-500/10 px-3 py-2 text-[11px] text-red-200">
-              {error}
+            <div className="rounded-2xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-[11px] text-red-200">
+              ⚠️ {error}
             </div>
           )}
 
