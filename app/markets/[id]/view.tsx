@@ -20,8 +20,14 @@ type Props = {
 };
 
 /**
- * Client component that displays market details with AI analysis comparison.
- * Automatically fetches and displays AI probabilities vs market odds.
+ * Market detail view component displaying market information and AI analysis.
+ * 
+ * Features:
+ * - Displays market question, category, and current favorite outcome
+ * - Automatically fetches AI analysis on mount or when market ID changes
+ * - Shows probability comparison bars, reasoning, and sources
+ * - Provides manual refresh button to regenerate AI forecast
+ * - Includes links to view the market on Polymarket
  */
 export function MarketDetailView({ market }: Props) {
   const [analysis, setAnalysis] = useState<AiAnalysisResult | null>(null);
