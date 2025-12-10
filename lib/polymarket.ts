@@ -50,7 +50,8 @@ function parseOutcomes(outcomesRaw: any, pricesRaw: any): OutcomePrice[] {
   pricesRaw = pricesRaw || [];
   // Map outcomes array to OutcomePrice objects
   // Match each outcome label with its corresponding price by index
-  // Ensure prices are valid numbers (default to 0 if invalid)
+  // Prices are normalized to ensure they're valid numbers (default to 0 if invalid)
+  // This creates the outcome-price pairs used throughout the application
   return outcomesRaw.map((label: any, i: number) => {
     const rawPrice = pricesRaw[i] ?? 0;
     const price = Number(rawPrice) || 0;
