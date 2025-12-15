@@ -10,6 +10,10 @@ type Props = {
 
 type SortOption = "volume" | "date";
 
+/**
+ * Client component for markets listing page with sorting functionality.
+ * Displays markets in a responsive grid with dropdown to sort by volume or end date.
+ */
 export function MarketsClient({ markets }: Props) {
   const [sortBy, setSortBy] = useState<SortOption>("volume");
 
