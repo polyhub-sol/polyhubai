@@ -13,6 +13,9 @@ type SortOption = "volume" | "date";
 export function MarketsClient({ markets }: Props) {
   const [sortBy, setSortBy] = useState<SortOption>("volume");
 
+  // Sort markets based on selected criteria
+  // Volume: highest trading volume first (descending)
+  // Date: latest end date first (newest markets first)
   const sortedMarkets = useMemo(() => {
     const sorted = [...markets];
     
@@ -20,7 +23,7 @@ export function MarketsClient({ markets }: Props) {
       return sorted.sort((a, b) => {
         const volumeA = a.volume ?? 0;
         const volumeB = b.volume ?? 0;
-        return volumeB - volumeA; // Descending
+        return volumeB - volumeA; // Descending - highest volume first
       });
     }
     
@@ -28,7 +31,7 @@ export function MarketsClient({ markets }: Props) {
       return sorted.sort((a, b) => {
         const dateA = a.end_date ? new Date(a.end_date).getTime() : 0;
         const dateB = b.end_date ? new Date(b.end_date).getTime() : 0;
-        return dateB - dateA; // Newest first
+        return dateB - dateA; // Latest end date first
       });
     }
     
