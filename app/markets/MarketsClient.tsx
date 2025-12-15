@@ -59,7 +59,7 @@ export function MarketsClient({ markets }: Props) {
             id="sort"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="rounded-full border border-ov-border/60 bg-black/60 px-3 py-1.5 text-[10px] text-ov-text-muted focus:border-ov-accent focus:outline-none transition-colors"
+            className="rounded-full border border-ov-border/60 bg-black/60 px-3 py-1.5 text-[10px] text-ov-text-muted hover:border-ov-border/80 focus:border-ov-accent focus:outline-none transition-colors cursor-pointer"
           >
             <option value="volume">Volume</option>
             <option value="date">End Date</option>
