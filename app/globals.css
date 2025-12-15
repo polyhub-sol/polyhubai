@@ -11,8 +11,12 @@ body {
   background: radial-gradient(circle at 0% 0%, #1e293b 0, #020617 40%, #000 100%);
 }
 
-html,
+html {
+  height: auto;
+  min-height: 100%;
+}
+
 body {
-  height: 100%;
+  min-height: 100%;
 }
 

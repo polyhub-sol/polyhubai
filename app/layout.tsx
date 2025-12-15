@@ -15,8 +15,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-ov-bg text-white">
-        <div className="relative min-h-screen flex flex-col">
+      <body className="bg-ov-bg text-white">
+        <div className="relative flex flex-col">
           {/* Glow background */}
           <div className="pointer-events-none fixed inset-0 opacity-60">
             <div className="absolute -top-32 -left-32 h-80 w-80 rounded-full bg-ov-accent blur-3xl opacity-20" />
@@ -60,7 +60,7 @@ export default function RootLayout({
           </header>
 
           {/* Content */}
-          <main className="relative z-10 flex-1">{children}</main>
+          <main className="relative z-10 bg-transparent">{children}</main>
 
           {/* Footer */}
           <footer className="relative z-10 border-t border-ov-border/55 bg-black/50 backdrop-blur">

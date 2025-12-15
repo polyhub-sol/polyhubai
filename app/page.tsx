@@ -1,8 +1,12 @@
 import Link from "next/link";
+import { fetchMarketsFromGamma } from "@/lib/polymarket";
+import { MarketCard } from "@/components/MarketCard";
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch top 6 markets by volume for the trending section (2 rows × 3 columns)
+  const topMarkets = await fetchMarketsFromGamma(6);
   return (
-    <div className="relative">
+    <div className="relative bg-transparent">
       {/* Hero Section: Main landing page content */}
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-9 md:flex-row md:items-center">
         <div className="flex-1 space-y-6">
@@ -67,8 +71,7 @@ export default function HomePage() {
       </div>
 
       {/* Coming Soon Section: Describes upcoming features like embedded wallets and auto-trading */}
-      <section className="border-t border-ov-border/60 bg-black/40">
-        <div className="mx-auto max-w-6xl px-4 py-9">
+      <div className="mx-auto max-w-6xl px-4 py-9">
           <div className="relative overflow-hidden rounded-3xl border border-ov-border/65 bg-gradient-to-br from-black/85 via-ov-bg-soft/95 to-black/90 p-5 shadow-ov-soft/90">
             <div className="pointer-events-none absolute inset-0 opacity-58">
               <div className="absolute -left-10 top-0 h-40 w-40 rounded-full bg-ov-accent/20 blur-3xl" />
@@ -183,7 +186,38 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+
+      {/* Trending Markets Section: Quick access to top volume markets */}
+      <div className="mx-auto max-w-6xl px-4 py-9">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold tracking-tight">
+              Trending Markets
+            </h2>
+            <p className="text-[11px] text-ov-text-muted mt-1">
+              Top volume markets right now — quick access to the most active predictions
+            </p>
+          </div>
+
+          {/* Grid of market cards: responsive 1 col mobile, 2 tablet, 3 desktop */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {topMarkets.map((market) => (
+              <MarketCard key={market.id} market={market} />
+            ))}
+          </div>
+
+          {/* Link to view all markets */}
+          <div className="mt-6 flex justify-center">
+            <Link
+              href="/markets"
+              className="inline-flex items-center rounded-full border border-ov-border/60 bg-black/70 px-5 py-2 text-sm font-medium text-ov-text-muted hover:text-white hover:border-purple-400/65 hover:bg-black/90 transition-all"
+            >
+              View all markets
+              <span aria-hidden className="ml-2 text-sm">
+                →
+              </span>
+            </Link>
+          </div>
+      </div>
     </div>
   );
 }
