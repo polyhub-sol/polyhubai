@@ -8,6 +8,7 @@ type Props = {
   markets: MarketSummary[];
 };
 
+/** Available sorting options for markets */
 type SortOption = "volume" | "date";
 
 /**
