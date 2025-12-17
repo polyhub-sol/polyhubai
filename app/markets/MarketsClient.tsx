@@ -18,7 +18,8 @@ export function MarketsClient({ markets }: Props) {
   // Default to volume sorting to show highest trading volume markets first
   const [sortBy, setSortBy] = useState<SortOption>("volume");
 
-  // Sort markets based on selected criteria
+  // Sort markets based on selected criteria using useMemo for performance
+  // Re-computes only when markets array or sortBy changes
   // Volume: highest trading volume first (descending)
   // Date: latest end date first (newest markets first)
   const sortedMarkets = useMemo(() => {
