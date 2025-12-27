@@ -23,7 +23,7 @@ export default function RootLayout({
             <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-ov-purple blur-3xl opacity-25" />
           </div>
 
-          {/* Navbar */}
+          {/* Navbar: Main site navigation with logo and menu items */}
           <header className="relative z-20 border-b border-ov-border/65 bg-gradient-to-b from-black/60 via-black/40 to-transparent backdrop-blur">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
               <Link href="/" title="Home - PolyHubAI" className="flex items-center gap-2">
@@ -62,7 +62,7 @@ export default function RootLayout({
           {/* Content */}
           <main className="relative z-10 bg-transparent">{children}</main>
 
-          {/* Footer */}
+          {/* Footer: Site footer with disclaimer and social links */}
           <footer className="relative z-10 border-t border-ov-border/55 bg-black/50 backdrop-blur">
             <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 text-[10px] text-ov-text-muted sm:flex-row sm:items-center sm:justify-between">
               <p>

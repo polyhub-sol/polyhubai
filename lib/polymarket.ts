@@ -35,7 +35,16 @@ export interface MarketSummary {
 // Polymarket Gamma API base URL for fetching market data
 const GAMMA_BASE_URL = "https://gamma-api.polymarket.com";
 
+/**
+ * Parses raw outcome and price data from Polymarket Gamma API into structured OutcomePrice objects.
+ * Handles JSON string parsing and validates/normalizes price values.
+ * 
+ * @param outcomesRaw - Raw outcomes array or JSON string from API
+ * @param pricesRaw - Raw prices array or JSON string from API
+ * @returns Array of OutcomePrice objects with normalized label and price values
+ */
 function parseOutcomes(outcomesRaw: any, pricesRaw: any): OutcomePrice[] {
+  // Parse JSON strings if needed, with safe fallback to empty arrays
   try {
     if (typeof outcomesRaw === "string") outcomesRaw = JSON.parse(outcomesRaw);
   } catch {
@@ -48,6 +57,7 @@ function parseOutcomes(outcomesRaw: any, pricesRaw: any): OutcomePrice[] {
   }
   outcomesRaw = outcomesRaw || [];
   pricesRaw = pricesRaw || [];
+  
   // Map outcomes array to OutcomePrice objects
   // Match each outcome label with its corresponding price by index
   // Prices are normalized to ensure they're valid numbers (default to 0 if invalid)

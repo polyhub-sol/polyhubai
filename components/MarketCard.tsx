@@ -15,7 +15,7 @@ type Props = {
  */
 export function MarketCard({ market }: Props) {
   // Sort outcomes by price (probability) descending and take the highest
-  // This represents the current market favorite
+  // This represents the current market favorite outcome
   const bestOutcome =
     [...market.outcomes].sort((a, b) => b.price - a.price)[0] || null;
 

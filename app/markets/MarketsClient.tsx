@@ -48,7 +48,7 @@ export function MarketsClient({ markets }: Props) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-5">
-      {/* Header section with title and sorting controls */}
+      {/* Header section with title and sort controls */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
           <h1 className="text-lg font-semibold tracking-tight">Markets</h1>
@@ -56,7 +56,6 @@ export function MarketsClient({ markets }: Props) {
             Active prediction markets from Polymarket
           </p>
         </div>
-        {/* Sorting dropdown control */}
         <div className="flex items-center gap-2">
           <label htmlFor="sort" className="text-[10px] text-ov-text-muted/90">
             Sort by:

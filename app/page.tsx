@@ -16,11 +16,11 @@ export default async function HomePage() {
               the crowd or the model?
             </span>
           </h1>
-              {/* Hero description */}
+              {/* Hero description: explains the core value proposition */}
               <p className="max-w-xl text-sm leading-relaxed text-ov-text-muted">
                 Compare live Polymarket odds against AI-generated probability forecasts. Discover where artificial intelligence and collective market wisdom diverge.
               </p>
-              {/* Main call-to-action buttons */}
+              {/* Main call-to-action buttons: primary navigation */}
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/markets"
