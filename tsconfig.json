@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    // Target ES2017 for modern browser support
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    // Enable strict type checking for better code quality
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,6 +20,7 @@
         "name": "next"
       }
     ],
+    // Path alias for cleaner imports (e.g., @/components)
     "paths": {
       "@/*": ["./*"]
     }
