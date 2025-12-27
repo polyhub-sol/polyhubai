@@ -25,6 +25,7 @@ export function MarketsClient({ markets }: Props) {
   // Volume: highest trading volume first (descending)
   // Date: latest end date first (newest markets first)
   const sortedMarkets = useMemo(() => {
+    // Create a copy to avoid mutating the original array
     const sorted = [...markets];
     
     if (sortBy === "volume") {

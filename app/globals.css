@@ -2,15 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark color scheme for the entire application */
 :root {
   color-scheme: dark;
 }
 
+/* Base body styles with dark gradient background */
 body {
   @apply bg-ov-bg text-white antialiased;
   background: radial-gradient(circle at 0% 0%, #1e293b 0, #020617 40%, #000 100%);
 }
 
+/* Ensure full height layout */
 html {
   height: auto;
   min-height: 100%;

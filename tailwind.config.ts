@@ -1,5 +1,11 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Tailwind CSS configuration for PolyHubAI.
+ * 
+ * Defines custom color palette and shadow utilities matching the dark,
+ * crypto-native design system with cyan and purple accent colors.
+ */
 const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -7,6 +13,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Custom color palette for dark theme with gradient accents
       colors: {
         "ov-bg": "#050814",
         "ov-bg-soft": "#070b1a",
@@ -16,6 +23,7 @@ const config: Config = {
         "ov-purple": "#a855f7",
         "ov-text-muted": "#9ca3af",
       },
+      // Custom shadow utilities for glow effects
       boxShadow: {
         "ov-soft": "0 20px 50px rgba(15, 23, 42, 0.9)",
         "ov-glow": "0 0 35px rgba(34, 211, 238, 0.45)",
