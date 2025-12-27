@@ -54,8 +54,8 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
         </button>
       </div>
 
-          {/* Display analysis results if available, otherwise show empty state */}
-          {analysis ? (
+      {/* Display analysis results if available, otherwise show empty state */}
+      {analysis ? (
             <>
               <ProbabilityBars
                 aiProbabilities={analysis.ai_probabilities}
@@ -68,11 +68,11 @@ export function AIResultPanel({ analysis, loading, onRefresh }: Props) {
               />
             </>
           ) : (
-            <div 
-              className="rounded-2xl border border-dashed border-ov-border/55 bg-black/40 p-4 text-sm text-ov-text-muted"
-              role="status"
-              aria-live="polite"
-            >
+            <div
+          className="rounded-2xl border border-dashed border-ov-border/55 bg-black/40 p-4 text-sm text-ov-text-muted"
+          role="status"
+          aria-live="polite"
+        >
           No AI analysis yet. Click &ldquo;Re-run AI view&rdquo; above to generate a forecast.
         </div>
       )}

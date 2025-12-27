@@ -8,7 +8,9 @@ type Props = {
 
 /**
  * Displays AI reasoning output including main reasoning text, bullet points, and optional sources.
+ * 
  * Used in the market detail view to show how the AI arrived at its probability forecasts.
+ * Provides transparency into the model's decision-making process.
  */
 export function ReasoningFeed({ reasoning, bullets, sources }: Props) {
   return (

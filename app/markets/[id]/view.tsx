@@ -67,8 +67,6 @@ export function MarketDetailView({ market }: Props) {
 
   // Find the outcome with the highest market probability (current market favorite)
   // Sorts outcomes by price (probability) descending and takes the first one
-  // Find the outcome with the highest market probability (current market favorite)
-  // Sorts outcomes by price (probability) descending and takes the first one
   const bestOutcome =
     [...market.outcomes].sort((a, b) => b.price - a.price)[0] || null;
 
@@ -112,8 +110,8 @@ export function MarketDetailView({ market }: Props) {
           {market.question}
         </h1>
 
-            {/* Show the outcome with the highest current market probability */}
-            {bestOutcome && (
+        {/* Show the outcome with the highest current market probability */}
+        {bestOutcome && (
               <p className="text-[12px] text-ov-text-muted/95">
                 Current market favorite:{" "}
                 <span className="font-semibold text-purple-300">
@@ -129,14 +127,13 @@ export function MarketDetailView({ market }: Props) {
         onRefresh={runAnalysis}
       />
 
-          {/* Display error message if AI analysis fails */}
-          {error && (
+      {/* Display error message if AI analysis fails */}
+      {error && (
             <div className="rounded-2xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-[11px] text-red-200">
               ⚠️ {error}
             </div>
           )}
 
-          {/* Disclaimer about AI-generated data */}
     </div>
   );
 }

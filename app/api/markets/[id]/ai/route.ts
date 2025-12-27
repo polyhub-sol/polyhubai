@@ -5,10 +5,6 @@ import OpenAI from "openai";
 type Params = { params: { id: string } };
 
 /**
- * Normalizes outcome prices to probabilities that sum to 1.0.
- * Handles edge cases where prices sum to zero by distributing evenly.
- */
-/**
  * Normalizes market outcome prices to probabilities that sum to 1.0.
  * Handles edge cases where total is zero by distributing evenly across all outcomes.
  * 
@@ -105,17 +101,17 @@ export async function POST(_: Request, { params }: Params) {
     );
   }
 
-      // Parse OpenAI's JSON response
-      // The model is instructed to return JSON with ai_probabilities, reasoning, bullet_points, and sources
-      const raw = completion.choices[0].message.content ?? "{}";
-      let data: any;
-      try {
-        data = JSON.parse(raw);
-      } catch {
-        data = {};
-      }
+  // Parse OpenAI's JSON response
+  // The model is instructed to return JSON with ai_probabilities, reasoning, bullet_points, and sources
+  const raw = completion.choices[0].message.content ?? "{}";
+  let data: any;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    data = {};
+  }
 
-      // Extract structured data from OpenAI response with safe defaults
+  // Extract structured data from OpenAI response with safe defaults
       const ai_probs_raw = data.ai_probabilities ?? {};
       const bullet_points = data.bullet_points ?? [];
       const reasoning = data.reasoning ?? "No reasoning provided.";
@@ -144,7 +140,6 @@ export async function POST(_: Request, { params }: Params) {
     aiClean[key] = aiClean[key] / total;
   }
 
-  // Calculate edge: difference between AI probability and market probability (positive = AI higher, negative = market higher)
   // Calculate edge: AI probability minus market probability for each outcome
   // Positive edge = AI is more bullish than market
   // Negative edge = AI is more bearish than market

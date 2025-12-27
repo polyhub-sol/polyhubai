@@ -7,8 +7,10 @@ import { fetchMarketsFromGamma } from "@/lib/polymarket";
  * Returns a list of active markets from Polymarket Gamma API.
  * Markets are sorted by trading volume in descending order.
  * 
+ * Query Parameters:
+ * - limit: Maximum number of markets to return (default: 40)
+ * 
  * @param request - Next.js request object with optional query params
- * @param request.searchParams.limit - Maximum number of markets to return (default: 40)
  * @returns JSON array of MarketSummary objects or error response
  */
 export async function GET(request: Request) {
