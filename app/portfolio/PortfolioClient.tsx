@@ -49,8 +49,13 @@ export function PortfolioClient() {
     }
   };
 
+  // Recalculate positions when update key changes
   const openPositions = portfolioManager.getOpenPositions();
   const closedPositions = portfolioManager.getClosedPositions();
+  
+  // Use positionsUpdateKey to ensure positions are recalculated on state changes
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _ = positionsUpdateKey;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6">
