@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
 import { Connection, PublicKey, Keypair } from "@solana/web3.js";
-import bs58 from "bs58";
 
 /**
  * Wallet connection state and methods for embedded wallet management.
