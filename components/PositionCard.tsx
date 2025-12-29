@@ -52,22 +52,27 @@ export function PositionCard({ position, onClose }: Props) {
           <div className="grid grid-cols-2 gap-3 text-[11px]">
             <div>
               <p className="text-ov-text-muted">Entry Price</p>
-              <p className="font-medium">{(position.entryPrice * 100).toFixed(1)}%</p>
+              <p className="font-medium">
+                {isFinite(position.entryPrice) ? `${(position.entryPrice * 100).toFixed(1)}%` : "N/A"}
+              </p>
             </div>
             <div>
               <p className="text-ov-text-muted">Current Price</p>
               <p className="font-medium">
                 {position.status === "open"
-                  ? (position.currentPrice * 100).toFixed(1)
-                  : position.exitTime
-                    ? (position.currentPrice * 100).toFixed(1)
+                  ? isFinite(position.currentPrice)
+                    ? `${(position.currentPrice * 100).toFixed(1)}%`
+                    : "N/A"
+                  : position.exitTime && isFinite(position.currentPrice)
+                    ? `${(position.currentPrice * 100).toFixed(1)}%`
                     : "N/A"}
-                %
               </p>
             </div>
             <div>
               <p className="text-ov-text-muted">Size</p>
-              <p className="font-medium">{position.size.toFixed(4)} SOL</p>
+              <p className="font-medium">
+                {isFinite(position.size) ? `${position.size.toFixed(4)} SOL` : "N/A"}
+              </p>
             </div>
             <div>
               <p className="text-ov-text-muted">P&L</p>
@@ -76,12 +81,12 @@ export function PositionCard({ position, onClose }: Props) {
                   (pnl || 0) >= 0 ? "text-emerald-400" : "text-red-400"
                 }`}
               >
-                {pnl !== undefined ? `${pnl >= 0 ? "+" : ""}${pnl.toFixed(4)} SOL` : "N/A"}
+                {pnl !== undefined && isFinite(pnl) ? `${pnl >= 0 ? "+" : ""}${pnl.toFixed(4)} SOL` : "N/A"}
               </p>
             </div>
           </div>
 
-          {pnlPercent !== undefined && (
+          {pnlPercent !== undefined && isFinite(pnlPercent) && (
             <div className="pt-1">
               <p className="text-[10px] text-ov-text-muted">
                 Return:{" "}
