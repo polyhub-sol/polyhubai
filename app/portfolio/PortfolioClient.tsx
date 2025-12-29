@@ -12,7 +12,7 @@ import Link from "next/link";
  * Displays portfolio summary, positions, and performance metrics.
  */
 export function PortfolioClient() {
-  const { publicKey, connected, connect, getBalance } = useWallet();
+  const { publicKey, connected, connect, getBalance, error, connecting } = useWallet();
   const [balance, setBalance] = useState<number | null>(null);
   const [portfolioManager] = useState(() => new PortfolioManager());
   const [portfolioSummary, setPortfolioSummary] = useState<PortfolioSummary | null>(null);
