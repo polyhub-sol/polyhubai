@@ -118,8 +118,19 @@ export function AgentManagerClient() {
                 <div className="text-right">
                   <p className="text-[10px] text-ov-text-muted mb-1">Balance</p>
                   <p className="text-sm font-semibold">
-                    {balance !== null && isFinite(balance) ? `${balance.toFixed(4)} SOL` : balance === null ? "Loading..." : "Error"}
+                    {balance !== null && isFinite(balance) 
+                      ? `${balance.toFixed(4)} SOL` 
+                      : balance === null 
+                        ? "Loading..." 
+                        : balance === 0
+                          ? "0.0000 SOL (Rate limited)"
+                          : "Error"}
                   </p>
+                  {balance === 0 && (
+                    <p className="mt-1 text-[9px] text-ov-text-muted/70">
+                      RPC rate limited. Set NEXT_PUBLIC_SOLANA_RPC_URL for custom endpoint.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
