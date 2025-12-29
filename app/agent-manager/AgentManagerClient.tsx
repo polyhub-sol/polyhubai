@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useWallet } from "@/contexts/WalletContext";
-import { STRATEGY_TEMPLATES, StrategyTemplate, getStrategyTemplate } from "@/lib/strategyTemplates";
+import { STRATEGY_TEMPLATES, getStrategyTemplate } from "@/lib/strategyTemplates";
 import { PortfolioManager, PortfolioSummary } from "@/lib/portfolio";
 import { PortfolioSummaryCard } from "@/components/PortfolioSummary";
 import { PositionCard } from "@/components/PositionCard";
@@ -11,7 +11,7 @@ import { PositionCard } from "@/components/PositionCard";
  * Client component for agent manager with wallet integration and strategy management.
  */
 export function AgentManagerClient() {
-  const { publicKey, connected, connect, disconnect, getBalance, connection } = useWallet();
+  const { publicKey, connected, connect, disconnect, getBalance } = useWallet();
   const [balance, setBalance] = useState<number | null>(null);
   const [selectedStrategy, setSelectedStrategy] = useState<string | null>(null);
   const [portfolioManager] = useState(() => new PortfolioManager());
