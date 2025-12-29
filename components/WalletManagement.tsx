@@ -7,7 +7,7 @@ import { useWallet } from "@/contexts/WalletContext";
  * Component for managing wallet deposits and withdrawals.
  */
 export function WalletManagement() {
-  const { publicKey, connected, deposit, withdraw, getBalance, isDevnet, error } = useWallet();
+  const { publicKey, connected, deposit, withdraw, getBalance, isDevnet, error, getRpcUrl, setRpcUrl } = useWallet();
   const [depositAmount, setDepositAmount] = useState<string>("");
   const [withdrawAmount, setWithdrawAmount] = useState<string>("");
   const [withdrawAddress, setWithdrawAddress] = useState<string>("");
@@ -100,6 +100,74 @@ export function WalletManagement() {
           ✓ {successMessage}
         </div>
       )}
+
+      {/* RPC Settings */}
+      <div className="mb-4 rounded-xl border border-ov-border/55 bg-black/40 p-3">
+        <div className="flex items-center justify-between">
+          <div className="flex-1">
+            <p className="text-[10px] text-ov-text-muted mb-1">RPC Endpoint</p>
+            <p className="font-mono text-[10px] text-ov-text break-all">
+              {getRpcUrl() || "Not set"}
+            </p>
+            {process.env.NEXT_PUBLIC_SOLANA_RPC_URL && (
+              <p className="mt-1 text-[9px] text-ov-text-muted/70">
+                Env var set: {process.env.NEXT_PUBLIC_SOLANA_RPC_URL.slice(0, 30)}...
+              </p>
+            )}
+          </div>
+          <button
+            onClick={() => setShowRpcSettings(!showRpcSettings)}
+            className="ml-3 rounded-lg border border-ov-border/55 bg-black/70 px-3 py-1.5 text-[10px] font-medium text-ov-text-muted hover:text-white hover:border-ov-accent transition-all"
+          >
+            {showRpcSettings ? "Hide" : "Change"}
+          </button>
+        </div>
+        
+        {showRpcSettings && (
+          <div className="mt-3 space-y-2">
+            <input
+              type="text"
+              value={customRpcUrl}
+              onChange={(e) => setCustomRpcUrl(e.target.value)}
+              placeholder="https://api.mainnet-beta.solana.com"
+              className="w-full rounded-lg border border-ov-border/55 bg-black/70 px-3 py-2 text-sm font-mono text-ov-text placeholder:text-ov-text-muted focus:border-ov-accent focus:outline-none"
+            />
+            <div className="flex gap-2">
+              <button
+                onClick={() => {
+                  if (customRpcUrl.trim()) {
+                    setRpcUrl(customRpcUrl.trim());
+                    setCustomRpcUrl("");
+                    setShowRpcSettings(false);
+                    setSuccessMessage("RPC URL updated! Refreshing connection...");
+                    setTimeout(() => {
+                      getBalance();
+                      setSuccessMessage(null);
+                    }, 1000);
+                  }
+                }}
+                className="flex-1 rounded-lg border border-ov-border/55 bg-black/70 px-3 py-1.5 text-[10px] font-medium text-ov-text-muted hover:text-white hover:border-ov-accent transition-all"
+              >
+                Save
+              </button>
+              <button
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    localStorage.removeItem("polyhub_custom_rpc_url");
+                    window.location.reload();
+                  }
+                }}
+                className="rounded-lg border border-ov-border/55 bg-black/70 px-3 py-1.5 text-[10px] font-medium text-ov-text-muted hover:text-white hover:border-red-400/65 transition-all"
+              >
+                Reset
+              </button>
+            </div>
+            <p className="text-[9px] text-ov-text-muted/70">
+              This will override the environment variable. Changes persist in localStorage.
+            </p>
+          </div>
+        )}
+      </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         {/* Deposit Section */}
