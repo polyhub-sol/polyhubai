@@ -32,6 +32,10 @@ interface WalletContextType {
   withdraw: (toAddress: string, amount: number) => Promise<string | null>;
   /** Check if we're on devnet (for airdrop functionality) */
   isDevnet: boolean;
+  /** Get the current RPC URL being used */
+  getRpcUrl: () => string | null;
+  /** Set a custom RPC URL (stored in localStorage) */
+  setRpcUrl: (url: string) => void;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -336,6 +340,43 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     }
   }, [publicKey, connection, keypair]);
 
+  /**
+   * Get the current RPC URL being used.
+   */
+  const getRpcUrl = useCallback(() => {
+    return rpcUrl;
+  }, [rpcUrl]);
+
+  /**
+   * Set a custom RPC URL (stored in localStorage and updates connection).
+   */
+  const setRpcUrl = useCallback((url: string) => {
+    if (!url || typeof url !== "string") {
+      setError("Invalid RPC URL");
+      return;
+    }
+
+    try {
+      // Validate URL format
+      new URL(url);
+      
+      // Store in localStorage
+      if (typeof window !== "undefined") {
+        localStorage.setItem("polyhub_custom_rpc_url", url);
+      }
+      
+      // Update connection
+      const isDevnetNetwork = url.includes("devnet") || url.includes("testnet");
+      setIsDevnet(isDevnetNetwork);
+      setRpcUrlState(url);
+      setConnection(new Connection(url, "confirmed"));
+      setError(null);
+    } catch (err) {
+      setError("Invalid RPC URL format");
+      console.error("Failed to set RPC URL:", err);
+    }
+  }, []);
+
   const value: WalletContextType = {
     publicKey,
     connection,
@@ -349,6 +390,8 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     deposit,
     withdraw,
     isDevnet,
+    getRpcUrl,
+    setRpcUrl,
   };
 
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
