@@ -64,7 +64,7 @@ export function MarketCard({ market }: Props) {
       </div>
 
       {/* Action buttons section */}
-      <div className="mt-4 flex items-center justify-between gap-2">
+      <div className="mt-auto flex items-center justify-between gap-2 pt-4">
         <p className="text-[11px] text-ov-text-muted">
           View AI forecast comparison or open on Polymarket
         </p>

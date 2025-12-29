@@ -40,6 +40,13 @@ export default function RootLayout({
                 </div>
               </Link>
 
+              {/* Contract Address - Centered */}
+              <div className="absolute left-1/2 -translate-x-1/2 hidden md:block">
+                <p className="text-[11px] text-ov-text-muted whitespace-nowrap">
+                  Contract Address: <span className="font-mono text-ov-text">2L8D7QswRBYi68aY3nYKTH3mHyq8hqtzrVPkHE66pump</span>
+                </p>
+              </div>
+
               <nav className="flex items-center gap-3 text-xs font-medium">
                 <Link
                   href="/markets"
