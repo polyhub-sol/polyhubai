@@ -33,12 +33,12 @@ export function PortfolioClient() {
     }
   }, [connected, publicKey, getBalance]);
 
-  // Update portfolio summary
+  // Update portfolio summary when balance or positions change
   useEffect(() => {
     const availableBalance = balance || 0;
     const summary = portfolioManager.calculateSummary(availableBalance);
     setPortfolioSummary(summary);
-  }, [balance, portfolioManager]);
+  }, [balance, portfolioManager, positionsUpdateKey]);
 
   const handleClosePosition = (positionId: string) => {
     // In a real implementation, this would close the position on-chain
