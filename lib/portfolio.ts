@@ -110,9 +110,48 @@ export class PortfolioManager {
    */
   updatePosition(id: string, updates: Partial<Position>): void {
     const position = this.positions.get(id);
-    if (position) {
-      this.positions.set(id, { ...position, ...updates });
+    if (!position) {
+      return;
     }
+
+    // Validate numeric updates
+    if (updates.entryPrice !== undefined && (!isFinite(updates.entryPrice) || updates.entryPrice < 0 || updates.entryPrice > 1)) {
+      console.warn(`Invalid entryPrice update for position ${id}:`, updates.entryPrice);
+      delete updates.entryPrice;
+    }
+
+    if (updates.currentPrice !== undefined && (!isFinite(updates.currentPrice) || updates.currentPrice < 0 || updates.currentPrice > 1)) {
+      console.warn(`Invalid currentPrice update for position ${id}:`, updates.currentPrice);
+      delete updates.currentPrice;
+    }
+
+    if (updates.size !== undefined && (!isFinite(updates.size) || updates.size <= 0)) {
+      console.warn(`Invalid size update for position ${id}:`, updates.size);
+      delete updates.size;
+    }
+
+    if (updates.realizedPnl !== undefined && !isFinite(updates.realizedPnl)) {
+      console.warn(`Invalid realizedPnl update for position ${id}:`, updates.realizedPnl);
+      delete updates.realizedPnl;
+    }
+
+    if (updates.unrealizedPnl !== undefined && !isFinite(updates.unrealizedPnl)) {
+      console.warn(`Invalid unrealizedPnl update for position ${id}:`, updates.unrealizedPnl);
+      delete updates.unrealizedPnl;
+    }
+
+    // Validate date updates
+    if (updates.entryTime !== undefined && (!(updates.entryTime instanceof Date) || isNaN(updates.entryTime.getTime()))) {
+      console.warn(`Invalid entryTime update for position ${id}:`, updates.entryTime);
+      delete updates.entryTime;
+    }
+
+    if (updates.exitTime !== undefined && updates.exitTime !== null && (!(updates.exitTime instanceof Date) || isNaN(updates.exitTime.getTime()))) {
+      console.warn(`Invalid exitTime update for position ${id}:`, updates.exitTime);
+      delete updates.exitTime;
+    }
+
+    this.positions.set(id, { ...position, ...updates });
   }
 
   /**
