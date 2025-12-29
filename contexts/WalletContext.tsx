@@ -93,13 +93,26 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
       // If no keypair exists, create a new one
       if (!walletKeypair) {
-        walletKeypair = Keypair.generate();
-        setKeypair(walletKeypair);
+        try {
+          walletKeypair = Keypair.generate();
+          setKeypair(walletKeypair);
 
-        // Store keypair in localStorage (in production, this should be encrypted)
-        if (typeof window !== "undefined") {
-          const secretKeyArray = Array.from(walletKeypair.secretKey);
-          localStorage.setItem("polyhub_wallet_keypair", JSON.stringify(secretKeyArray));
+          // Store keypair in localStorage (in production, this should be encrypted)
+          if (typeof window !== "undefined") {
+            try {
+              const secretKeyArray = Array.from(walletKeypair.secretKey);
+              if (secretKeyArray.length === 64) {
+                localStorage.setItem("polyhub_wallet_keypair", JSON.stringify(secretKeyArray));
+              } else {
+                console.error("Invalid keypair secret key length");
+              }
+            } catch (storageErr) {
+              console.error("Failed to store keypair in localStorage:", storageErr);
+            }
+          }
+        } catch (keypairErr) {
+          console.error("Failed to generate keypair:", keypairErr);
+          throw keypairErr;
         }
       }
 
