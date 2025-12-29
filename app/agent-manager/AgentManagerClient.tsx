@@ -174,33 +174,41 @@ export function AgentManagerClient() {
                 <p className="mb-3 text-[11px] text-ov-text-muted">{template.description}</p>
                 <div className="grid grid-cols-2 gap-2 text-[10px] text-ov-text-muted">
                   <div>
-                    <span className="font-medium">Min Edge:</span> {(template.minEdge * 100).toFixed(0)}%
+                    <span className="font-medium">Min Edge:</span>{" "}
+                    {isFinite(template.minEdge) ? `${(template.minEdge * 100).toFixed(0)}%` : "N/A"}
                   </div>
                   <div>
-                    <span className="font-medium">Max Position:</span> {(template.maxPositionSize * 100).toFixed(0)}%
+                    <span className="font-medium">Max Position:</span>{" "}
+                    {isFinite(template.maxPositionSize) ? `${(template.maxPositionSize * 100).toFixed(0)}%` : "N/A"}
                   </div>
                   <div>
-                    <span className="font-medium">Max Positions:</span> {template.maxPositions}
+                    <span className="font-medium">Max Positions:</span>{" "}
+                    {isFinite(template.maxPositions) ? template.maxPositions : "N/A"}
                   </div>
                   <div>
                     <span className="font-medium">Stop Loss:</span>{" "}
-                    {template.useStopLoss ? `${(template.stopLossPercent || 0) * 100}%` : "None"}
+                    {template.useStopLoss && isFinite(template.stopLossPercent)
+                      ? `${(template.stopLossPercent || 0) * 100}%`
+                      : "None"}
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {selectedStrategy && (
-            <div className="mt-4 rounded-xl border border-ov-accent/50 bg-ov-accent/5 p-4">
-              <p className="text-sm font-medium text-ov-accent mb-2">
-                Selected: {getStrategyTemplate(selectedStrategy)?.name}
-              </p>
-              <p className="text-[11px] text-ov-text-muted">
-                This strategy will be used for automated trading. Configure additional settings in the agent configuration panel.
-              </p>
-            </div>
-          )}
+          {selectedStrategy && (() => {
+            const template = getStrategyTemplate(selectedStrategy);
+            return template ? (
+              <div className="mt-4 rounded-xl border border-ov-accent/50 bg-ov-accent/5 p-4">
+                <p className="text-sm font-medium text-ov-accent mb-2">
+                  Selected: {template.name}
+                </p>
+                <p className="text-[11px] text-ov-text-muted">
+                  This strategy will be used for automated trading. Configure additional settings in the agent configuration panel.
+                </p>
+              </div>
+            ) : null;
+          })()}
         </div>
       )}
 
