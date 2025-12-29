@@ -11,7 +11,7 @@ import { PositionCard } from "@/components/PositionCard";
  * Client component for agent manager with wallet integration and strategy management.
  */
 export function AgentManagerClient() {
-  const { publicKey, connected, connect, disconnect, getBalance } = useWallet();
+  const { publicKey, connected, connect, disconnect, getBalance, error, connecting } = useWallet();
   const [balance, setBalance] = useState<number | null>(null);
   const [selectedStrategy, setSelectedStrategy] = useState<string | null>(null);
   const [portfolioManager] = useState(() => new PortfolioManager());
