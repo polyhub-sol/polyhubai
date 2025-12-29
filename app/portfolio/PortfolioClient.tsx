@@ -5,6 +5,7 @@ import { useWallet } from "@/contexts/WalletContext";
 import { PortfolioManager, PortfolioSummary } from "@/lib/portfolio";
 import { PortfolioSummaryCard } from "@/components/PortfolioSummary";
 import { PositionCard } from "@/components/PositionCard";
+import { WalletManagement } from "@/components/WalletManagement";
 import Link from "next/link";
 
 /**
@@ -116,6 +117,11 @@ export function PortfolioClient() {
               <PortfolioSummaryCard summary={portfolioSummary} />
             </div>
           )}
+
+          {/* Wallet Management */}
+          <div className="mb-6">
+            <WalletManagement />
+          </div>
 
           {/* Wallet Info */}
           <div className="mb-6 rounded-2xl border border-ov-border/55 bg-black/55 p-4 shadow-ov-soft">
