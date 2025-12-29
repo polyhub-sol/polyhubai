@@ -191,12 +191,9 @@ export function AgentManagerClient() {
                   </div>
                   <div>
                     <span className="font-medium">Stop Loss:</span>{" "}
-                    {(() => {
-                      const stopLoss = template.stopLossPercent;
-                      return template.useStopLoss && stopLoss !== undefined && isFinite(stopLoss)
-                        ? `${stopLoss * 100}%`
-                        : "None";
-                    })()}
+                    {template.useStopLoss && typeof template.stopLossPercent === "number" && isFinite(template.stopLossPercent)
+                      ? `${template.stopLossPercent * 100}%`
+                      : "None"}
                   </div>
                 </div>
               </div>
