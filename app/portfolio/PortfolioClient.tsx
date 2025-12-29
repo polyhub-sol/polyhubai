@@ -93,10 +93,14 @@ export function PortfolioClient() {
           </p>
           <button
             onClick={connect}
-            className="inline-flex items-center rounded-full bg-gradient-to-r from-ov-accent-soft to-ov-purple px-5 py-2 text-sm font-semibold text-black shadow-ov-glow/90 transition-all hover:shadow-ov-glow/70 hover:scale-[1.02]"
+            disabled={connecting}
+            className="inline-flex items-center rounded-full bg-gradient-to-r from-ov-accent-soft to-ov-purple px-5 py-2 text-sm font-semibold text-black shadow-ov-glow/90 transition-all hover:shadow-ov-glow/70 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Connect Wallet
+            {connecting ? "Connecting..." : "Connect Wallet"}
           </button>
+          {error && (
+            <p className="mt-2 text-xs text-red-400">{error}</p>
+          )}
           <Link
             href="/agent-manager"
             className="mt-4 text-[11px] text-ov-text-muted hover:text-ov-accent transition-colors"
