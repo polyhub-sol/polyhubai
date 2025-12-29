@@ -45,6 +45,14 @@ export class StrategyEngine {
     market: MarketAnalysis,
     template: StrategyTemplate
   ): StrategyDecision {
+    // Check if edges object is empty
+    if (!market.edges || Object.keys(market.edges).length === 0) {
+      return {
+        shouldExecute: false,
+        reason: "No edge data available for this market",
+      };
+    }
+
     // Find the outcome with the highest edge
     const bestOutcome = Object.entries(market.edges).reduce(
       (best, [outcome, edge]) => {
@@ -52,6 +60,14 @@ export class StrategyEngine {
       },
       { outcome: "", edge: -Infinity }
     );
+
+    // Check if we found a valid outcome
+    if (!bestOutcome.outcome || bestOutcome.edge === -Infinity) {
+      return {
+        shouldExecute: false,
+        reason: "No valid edge found for any outcome",
+      };
+    }
 
     // Check if edge meets minimum requirement
     if (bestOutcome.edge < template.minEdge) {
