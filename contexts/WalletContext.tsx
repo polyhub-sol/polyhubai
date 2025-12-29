@@ -43,8 +43,16 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   // Initialize connection to Solana network (mainnet-beta or devnet)
   useEffect(() => {
-    const rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || "https://api.mainnet-beta.solana.com";
-    setConnection(new Connection(rpcUrl, "confirmed"));
+    try {
+      const rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || "https://api.mainnet-beta.solana.com";
+      if (rpcUrl && typeof rpcUrl === "string") {
+        setConnection(new Connection(rpcUrl, "confirmed"));
+      } else {
+        console.error("Invalid RPC URL:", rpcUrl);
+      }
+    } catch (err) {
+      console.error("Failed to initialize Solana connection:", err);
+    }
   }, []);
 
   // Load wallet from localStorage on mount
