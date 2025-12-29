@@ -65,7 +65,24 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         const storedKeypair = localStorage.getItem("polyhub_wallet_keypair");
         if (storedKeypair) {
           const secretKey = JSON.parse(storedKeypair);
+          
+          // Validate secret key is an array with correct length (64 bytes for Solana keypair)
+          if (!Array.isArray(secretKey) || secretKey.length !== 64) {
+            throw new Error("Invalid keypair format in storage");
+          }
+
+          // Validate all values are numbers
+          if (!secretKey.every((val) => typeof val === "number" && val >= 0 && val <= 255)) {
+            throw new Error("Invalid keypair values in storage");
+          }
+
           const keypair = Keypair.fromSecretKey(new Uint8Array(secretKey));
+          
+          // Validate keypair was created successfully
+          if (!keypair || !keypair.publicKey) {
+            throw new Error("Failed to create keypair from stored data");
+          }
+
           setKeypair(keypair);
           setPublicKey(keypair.publicKey);
         }
