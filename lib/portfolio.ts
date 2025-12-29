@@ -144,6 +144,11 @@ export class PortfolioManager {
     size: number,
     type: PositionType
   ): number {
+    // Validate inputs are finite numbers
+    if (!isFinite(entryPrice) || !isFinite(currentPrice) || !isFinite(size)) {
+      return 0;
+    }
+
     if (type === "long") {
       // Profit when price goes up
       return (currentPrice - entryPrice) * size;
@@ -192,20 +197,32 @@ export class PortfolioManager {
    * Calculate portfolio summary.
    */
   calculateSummary(availableBalance: number): PortfolioSummary {
+    // Ensure availableBalance is a valid number
+    const validBalance = isFinite(availableBalance) ? availableBalance : 0;
+
     const openPositions = this.getOpenPositions();
     const closedPositions = this.getClosedPositions();
 
-    const totalInvested = openPositions.reduce((sum, p) => sum + p.size, 0);
+    const totalInvested = openPositions.reduce((sum, p) => {
+      const size = isFinite(p.size) ? p.size : 0;
+      return sum + size;
+    }, 0);
     const totalRealizedPnl = closedPositions.reduce(
-      (sum, p) => sum + (p.realizedPnl || 0),
+      (sum, p) => {
+        const pnl = p.realizedPnl && isFinite(p.realizedPnl) ? p.realizedPnl : 0;
+        return sum + pnl;
+      },
       0
     );
     const totalUnrealizedPnl = openPositions.reduce(
-      (sum, p) => sum + (p.unrealizedPnl || 0),
+      (sum, p) => {
+        const pnl = p.unrealizedPnl && isFinite(p.unrealizedPnl) ? p.unrealizedPnl : 0;
+        return sum + pnl;
+      },
       0
     );
 
-    const totalValue = availableBalance + totalInvested + totalUnrealizedPnl;
+    const totalValue = validBalance + totalInvested + totalUnrealizedPnl;
 
     const winningTrades = closedPositions.filter((p) => (p.realizedPnl || 0) > 0).length;
     const winRate = closedPositions.length > 0 ? (winningTrades / closedPositions.length) * 100 : 0;
@@ -214,15 +231,15 @@ export class PortfolioManager {
       closedPositions.length > 0 ? totalRealizedPnl / closedPositions.length : 0;
 
     return {
-      totalValue,
-      availableBalance,
-      totalInvested,
-      totalRealizedPnl,
-      totalUnrealizedPnl,
+      totalValue: isFinite(totalValue) ? totalValue : 0,
+      availableBalance: validBalance,
+      totalInvested: isFinite(totalInvested) ? totalInvested : 0,
+      totalRealizedPnl: isFinite(totalRealizedPnl) ? totalRealizedPnl : 0,
+      totalUnrealizedPnl: isFinite(totalUnrealizedPnl) ? totalUnrealizedPnl : 0,
       openPositions: openPositions.length,
       closedPositions: closedPositions.length,
-      winRate,
-      averageReturn,
+      winRate: isFinite(winRate) ? winRate : 0,
+      averageReturn: isFinite(averageReturn) ? averageReturn : 0,
     };
   }
 
