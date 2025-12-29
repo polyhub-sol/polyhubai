@@ -17,6 +17,7 @@ export function PortfolioClient() {
   const [portfolioManager] = useState(() => new PortfolioManager());
   const [portfolioSummary, setPortfolioSummary] = useState<PortfolioSummary | null>(null);
   const [activeTab, setActiveTab] = useState<"open" | "closed">("open");
+  const [positionsUpdateKey, setPositionsUpdateKey] = useState(0);
 
   // Load balance when connected
   useEffect(() => {
@@ -43,6 +44,8 @@ export function PortfolioClient() {
       const availableBalance = balance || 0;
       const summary = portfolioManager.calculateSummary(availableBalance);
       setPortfolioSummary(summary);
+      // Force re-render to update positions list
+      setPositionsUpdateKey((prev) => prev + 1);
     }
   };
 
