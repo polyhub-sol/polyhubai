@@ -109,9 +109,14 @@ export function WalletManagement() {
             <p className="font-mono text-[10px] text-ov-text break-all">
               {getRpcUrl() || "Not set"}
             </p>
-            {process.env.NEXT_PUBLIC_SOLANA_RPC_URL && (
+            {typeof window !== "undefined" && process.env.NEXT_PUBLIC_SOLANA_RPC_URL && (
               <p className="mt-1 text-[9px] text-ov-text-muted/70">
-                Env var set: {process.env.NEXT_PUBLIC_SOLANA_RPC_URL.slice(0, 30)}...
+                Env var detected: {process.env.NEXT_PUBLIC_SOLANA_RPC_URL.slice(0, 40)}...
+              </p>
+            )}
+            {typeof window !== "undefined" && !process.env.NEXT_PUBLIC_SOLANA_RPC_URL && (
+              <p className="mt-1 text-[9px] text-amber-400/70">
+                ⚠️ NEXT_PUBLIC_SOLANA_RPC_URL not found. Using default or localStorage override.
               </p>
             )}
           </div>
