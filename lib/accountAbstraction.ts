@@ -142,6 +142,9 @@ export class AccountAbstraction {
    * Create a transfer transaction to another account.
    */
   createTransfer(toPubkey: PublicKey, amount: number): Transaction {
+    if (!toPubkey) {
+      throw new Error("Destination public key is required");
+    }
     return createTransferTransaction(this.connection, this.publicKey, toPubkey, amount);
   }
 
