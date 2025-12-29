@@ -49,13 +49,9 @@ export function PortfolioClient() {
     }
   };
 
-  // Recalculate positions when update key changes
+  // Recalculate positions when update key changes (forces re-render when positions change)
   const openPositions = portfolioManager.getOpenPositions();
   const closedPositions = portfolioManager.getClosedPositions();
-  
-  // Use positionsUpdateKey to ensure positions are recalculated on state changes
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const _ = positionsUpdateKey;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6">
@@ -156,7 +152,7 @@ export function PortfolioClient() {
             {/* Positions List */}
             {activeTab === "open" ? (
               openPositions.length > 0 ? (
-                <div className="space-y-3">
+                <div className="space-y-3" key={positionsUpdateKey}>
                   {openPositions.map((position) => (
                     <PositionCard
                       key={position.id}
@@ -189,7 +185,7 @@ export function PortfolioClient() {
                 </div>
               )
             ) : closedPositions.length > 0 ? (
-              <div className="space-y-3">
+              <div className="space-y-3" key={positionsUpdateKey}>
                 {closedPositions.map((position) => (
                   <PositionCard key={position.id} position={position} />
                 ))}
