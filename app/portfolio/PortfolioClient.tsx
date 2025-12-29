@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useWallet } from "@/contexts/WalletContext";
-import { PortfolioManager, Position, PortfolioSummary } from "@/lib/portfolio";
+import { PortfolioManager, PortfolioSummary } from "@/lib/portfolio";
 import { PortfolioSummaryCard } from "@/components/PortfolioSummary";
 import { PositionCard } from "@/components/PositionCard";
 import Link from "next/link";
