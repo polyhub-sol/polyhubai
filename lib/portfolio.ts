@@ -80,6 +80,28 @@ export class PortfolioManager {
    * Add a new position to the portfolio.
    */
   addPosition(position: Position): void {
+    // Validate position data
+    if (!position.id || !position.marketId || !position.outcome) {
+      console.error("Invalid position: missing required fields", position);
+      return;
+    }
+
+    // Validate numeric fields
+    if (
+      !isFinite(position.entryPrice) || position.entryPrice < 0 || position.entryPrice > 1 ||
+      !isFinite(position.currentPrice) || position.currentPrice < 0 || position.currentPrice > 1 ||
+      !isFinite(position.size) || position.size <= 0
+    ) {
+      console.error("Invalid position: invalid numeric values", position);
+      return;
+    }
+
+    // Validate entryTime is a valid date
+    if (!(position.entryTime instanceof Date) || isNaN(position.entryTime.getTime())) {
+      console.error("Invalid position: invalid entryTime", position);
+      return;
+    }
+
     this.positions.set(position.id, position);
   }
 
