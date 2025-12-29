@@ -60,8 +60,15 @@ export default function RootLayout({
                   Markets
                 </Link>
                 <Link
+                  href="/portfolio"
+                  title="View portfolio and positions"
+                  className="rounded-full border border-ov-border/75 bg-black/40 px-3 py-1.5 text-xs text-ov-text-muted hover:border-ov-accent hover:text-white hover:shadow-ov-glow transition-all"
+                >
+                  Portfolio
+                </Link>
+                <Link
                   href="/agent-manager"
-                  title="Manage trading agents (coming soon)"
+                  title="Manage trading agents and strategies"
                   className="rounded-full border border-ov-border/75 bg-black/40 px-3 py-1.5 text-xs text-ov-text-muted hover:border-ov-accent hover:text-white hover:shadow-ov-glow transition-all"
                 >
                   Agent Manager
