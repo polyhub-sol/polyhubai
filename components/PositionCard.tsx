@@ -14,10 +14,10 @@ export function PositionCard({ position, onClose }: Props) {
   const pnl = position.status === "open" ? position.unrealizedPnl : position.realizedPnl;
   const pnlPercent =
     position.status === "open"
-      ? position.entryPrice > 0
+      ? position.entryPrice > 0 && isFinite(position.entryPrice) && isFinite(position.currentPrice)
         ? ((position.currentPrice - position.entryPrice) / position.entryPrice) * 100
         : 0
-      : position.realizedPnl && position.size > 0
+      : position.realizedPnl && position.size > 0 && isFinite(position.realizedPnl) && isFinite(position.size)
         ? (position.realizedPnl / position.size) * 100
         : 0;
 

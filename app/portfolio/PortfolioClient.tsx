@@ -115,7 +115,7 @@ export function PortfolioClient() {
               <div className="text-right">
                 <p className="text-[10px] text-ov-text-muted mb-1">Available Balance</p>
                 <p className="text-sm font-semibold">
-                  {balance !== null ? `${balance.toFixed(4)} SOL` : "Loading..."}
+                  {balance !== null && isFinite(balance) ? `${balance.toFixed(4)} SOL` : balance === null ? "Loading..." : "Error"}
                 </p>
               </div>
             </div>
