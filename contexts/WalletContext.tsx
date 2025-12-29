@@ -47,20 +47,37 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isDevnet, setIsDevnet] = useState(false);
+  const [rpcUrl, setRpcUrlState] = useState<string | null>(null);
 
   // Initialize connection to Solana network (mainnet-beta or devnet)
   // Use a more reliable public RPC endpoint with fallback
   useEffect(() => {
     try {
-      // Try to use custom RPC URL from env, otherwise use reliable public endpoints
-      const rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 
-        "https://api.mainnet-beta.solana.com";
+      // Priority: localStorage override > env variable > default
+      let rpcUrl = typeof window !== "undefined" 
+        ? localStorage.getItem("polyhub_custom_rpc_url") 
+        : null;
+      
+      if (!rpcUrl) {
+        rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL;
+      }
+      
+      if (!rpcUrl) {
+        rpcUrl = "https://api.mainnet-beta.solana.com";
+      }
+      
+      // Log the RPC URL being used (for debugging)
+      if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+        console.log("Using RPC URL:", rpcUrl);
+        console.log("NEXT_PUBLIC_SOLANA_RPC_URL from env:", process.env.NEXT_PUBLIC_SOLANA_RPC_URL || "not set");
+      }
       
       // Detect if we're on devnet
       const isDevnetNetwork = rpcUrl.includes("devnet") || rpcUrl.includes("testnet");
       setIsDevnet(isDevnetNetwork);
       
       if (rpcUrl && typeof rpcUrl === "string") {
+        setRpcUrlState(rpcUrl);
         setConnection(new Connection(rpcUrl, "confirmed"));
       } else {
         console.error("Invalid RPC URL:", rpcUrl);
