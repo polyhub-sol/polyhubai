@@ -126,6 +126,13 @@ export class PortfolioManager {
     for (const [id, position] of this.positions.entries()) {
       if (position.status === "open" && priceUpdates[position.marketId]) {
         const currentPrice = priceUpdates[position.marketId];
+        
+        // Validate price is a valid number between 0 and 1 (probability)
+        if (!isFinite(currentPrice) || currentPrice < 0 || currentPrice > 1) {
+          console.warn(`Invalid price update for position ${id}:`, currentPrice);
+          continue;
+        }
+
         const unrealizedPnl = this.calculatePnl(
           position.entryPrice,
           currentPrice,
