@@ -111,7 +111,9 @@ export class StrategyEngine {
 
       case "market_mispricing":
         // Check if there's significant mispricing
-        const maxEdge = Math.max(...Object.values(market.edges));
+        const edgeValues = Object.values(market.edges).filter((e) => isFinite(e));
+        if (edgeValues.length === 0) return false;
+        const maxEdge = Math.max(...edgeValues);
         return maxEdge > 0.05;
 
       case "volume_spike":
