@@ -1,11 +1,15 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WalletProviderWrapper } from "@/components/WalletProviderWrapper";
 
 export const metadata: Metadata = {
   title: "PolyHubAI – AI vs Market Explorer",
   description:
     "Compare AI probabilities vs Polymarket market odds",
+  icons: {
+    icon: "/image.png",
+  },
 };
 
 export default function RootLayout({
@@ -67,7 +71,9 @@ export default function RootLayout({
           </header>
 
           {/* Content */}
-          <main className="relative z-10 bg-transparent">{children}</main>
+          <WalletProviderWrapper>
+            <main className="relative z-10 bg-transparent">{children}</main>
+          </WalletProviderWrapper>
 
           {/* Footer: Site footer with disclaimer and social links */}
           <footer className="relative z-10 border-t border-ov-border/55 bg-black/50 backdrop-blur">
