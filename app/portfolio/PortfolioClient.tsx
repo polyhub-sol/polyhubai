@@ -45,7 +45,12 @@ export function PortfolioClient() {
     // For now, we'll just update the local state
     const position = portfolioManager.getPosition(positionId);
     if (position && position.status === "open") {
-      portfolioManager.closePosition(positionId, position.currentPrice);
+      // Validate current price before closing
+      const exitPrice = isFinite(position.currentPrice) && position.currentPrice >= 0 && position.currentPrice <= 1
+        ? position.currentPrice
+        : position.entryPrice; // Fallback to entry price if current price is invalid
+      
+      portfolioManager.closePosition(positionId, exitPrice);
       const availableBalance = balance || 0;
       const summary = portfolioManager.calculateSummary(availableBalance);
       setPortfolioSummary(summary);
