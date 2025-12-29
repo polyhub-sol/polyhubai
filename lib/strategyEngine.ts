@@ -119,7 +119,7 @@ export class StrategyEngine {
       case "volume_spike":
         // In a real implementation, compare against historical volume
         // For now, just check if volume is above a threshold
-        return market.volume > 10000;
+        return isFinite(market.volume) && market.volume > 10000;
 
       case "time_based":
         // Check if market is within a certain time window
