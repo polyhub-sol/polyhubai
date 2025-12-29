@@ -180,8 +180,13 @@ export class StrategyEngine {
       return false;
     }
 
+    // Validate inputs and prevent division by zero
+    if (!isFinite(entryPrice) || !isFinite(currentPrice) || entryPrice === 0) {
+      return false;
+    }
+
     const lossPercent = Math.abs((currentPrice - entryPrice) / entryPrice);
-    return lossPercent >= template.stopLossPercent;
+    return isFinite(lossPercent) && lossPercent >= template.stopLossPercent;
   }
 }
 
