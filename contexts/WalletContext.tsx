@@ -49,6 +49,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   // Load wallet from localStorage on mount
   useEffect(() => {
+    // Only access localStorage in browser environment
+    if (typeof window === "undefined") return;
+
     const loadWallet = () => {
       try {
         const storedKeypair = localStorage.getItem("polyhub_wallet_keypair");
@@ -61,7 +64,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       } catch (err) {
         console.error("Failed to load wallet from storage:", err);
         // Clear corrupted data
-        localStorage.removeItem("polyhub_wallet_keypair");
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("polyhub_wallet_keypair");
+        }
       }
     };
 
@@ -84,8 +89,10 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         setKeypair(walletKeypair);
 
         // Store keypair in localStorage (in production, this should be encrypted)
-        const secretKeyArray = Array.from(walletKeypair.secretKey);
-        localStorage.setItem("polyhub_wallet_keypair", JSON.stringify(secretKeyArray));
+        if (typeof window !== "undefined") {
+          const secretKeyArray = Array.from(walletKeypair.secretKey);
+          localStorage.setItem("polyhub_wallet_keypair", JSON.stringify(secretKeyArray));
+        }
       }
 
       setPublicKey(walletKeypair.publicKey);
@@ -104,7 +111,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const disconnect = useCallback(() => {
     setKeypair(null);
     setPublicKey(null);
-    localStorage.removeItem("polyhub_wallet_keypair");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("polyhub_wallet_keypair");
+    }
     setError(null);
   }, []);
 
