@@ -21,7 +21,7 @@ interface WalletContextType {
   /** Connect to embedded wallet (creates new keypair if needed) */
   connect: () => Promise<void>;
   /** Disconnect wallet */
-  disconnect: () => Promise<void>;
+  disconnect: () => void;
   /** Get wallet balance in SOL */
   getBalance: () => Promise<number | null>;
   /** Sign a message with the wallet */
