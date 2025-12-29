@@ -123,8 +123,11 @@ export class StrategyEngine {
 
       case "time_based":
         // Check if market is within a certain time window
+        if (!market.endDate || !(market.endDate instanceof Date) || isNaN(market.endDate.getTime())) {
+          return false;
+        }
         const daysUntilEnd = (market.endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24);
-        return daysUntilEnd > 1 && daysUntilEnd < 30;
+        return isFinite(daysUntilEnd) && daysUntilEnd > 1 && daysUntilEnd < 30;
 
       default:
         return false;
