@@ -125,7 +125,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
     try {
       const balance = await connection.getBalance(publicKey);
-      return balance / 1e9; // Convert lamports to SOL
+      const solBalance = balance / 1e9; // Convert lamports to SOL
+      // Ensure we return a valid finite number
+      return isFinite(solBalance) && solBalance >= 0 ? solBalance : null;
     } catch (err) {
       console.error("Failed to get balance:", err);
       return null;
