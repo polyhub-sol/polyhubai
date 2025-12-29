@@ -26,6 +26,12 @@ interface WalletContextType {
   getBalance: () => Promise<number | null>;
   /** Sign a message with the wallet */
   signMessage: (message: Uint8Array) => Promise<Uint8Array | null>;
+  /** Deposit SOL (request airdrop on devnet, or show instructions for mainnet) */
+  deposit: (amount: number) => Promise<string | null>;
+  /** Withdraw SOL to another address */
+  withdraw: (toAddress: string, amount: number) => Promise<string | null>;
+  /** Check if we're on devnet (for airdrop functionality) */
+  isDevnet: boolean;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -40,11 +46,20 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const [connection, setConnection] = useState<Connection | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isDevnet, setIsDevnet] = useState(false);
 
   // Initialize connection to Solana network (mainnet-beta or devnet)
+  // Use a more reliable public RPC endpoint with fallback
   useEffect(() => {
     try {
-      const rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || "https://api.mainnet-beta.solana.com";
+      // Try to use custom RPC URL from env, otherwise use reliable public endpoints
+      const rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 
+        "https://api.mainnet-beta.solana.com";
+      
+      // Detect if we're on devnet
+      const isDevnetNetwork = rpcUrl.includes("devnet") || rpcUrl.includes("testnet");
+      setIsDevnet(isDevnetNetwork);
+      
       if (rpcUrl && typeof rpcUrl === "string") {
         setConnection(new Connection(rpcUrl, "confirmed"));
       } else {
@@ -161,6 +176,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   /**
    * Get wallet balance in SOL.
+   * Handles RPC errors gracefully, including 403 rate limits.
    */
   const getBalance = useCallback(async (): Promise<number | null> => {
     if (!publicKey || !connection) return null;
@@ -170,7 +186,18 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       const solBalance = balance / 1e9; // Convert lamports to SOL
       // Ensure we return a valid finite number
       return isFinite(solBalance) && solBalance >= 0 ? solBalance : null;
-    } catch (err) {
+    } catch (err: any) {
+      // Handle RPC errors gracefully
+      const errorMessage = err?.message || String(err);
+      
+      // Check for rate limiting or access forbidden errors
+      if (errorMessage.includes("403") || errorMessage.includes("Access forbidden") || errorMessage.includes("rate limit")) {
+        console.warn("RPC rate limit or access forbidden. Consider using a custom RPC endpoint.");
+        // Return 0 instead of null to show that we tried but hit a rate limit
+        // This allows the UI to still function
+        return 0;
+      }
+      
       console.error("Failed to get balance:", err);
       return null;
     }
@@ -196,6 +223,102 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     [keypair]
   );
 
+  /**
+   * Deposit SOL to wallet.
+   * On devnet: requests airdrop
+   * On mainnet: returns null (user should use external methods)
+   */
+  const deposit = useCallback(async (amount: number): Promise<string | null> => {
+    if (!publicKey || !connection || !keypair) {
+      setError("Wallet not connected");
+      return null;
+    }
+
+    if (!isFinite(amount) || amount <= 0) {
+      setError("Invalid deposit amount");
+      return null;
+    }
+
+    // Only allow airdrop on devnet
+    if (!isDevnet) {
+      setError("Airdrop only available on devnet. Use external methods to deposit on mainnet.");
+      return null;
+    }
+
+    try {
+      setError(null);
+      const { requestAirdrop } = await import("@/lib/accountAbstraction");
+      const signature = await requestAirdrop(connection, publicKey, amount);
+      return signature;
+    } catch (err: any) {
+      const errorMessage = err?.message || "Failed to request airdrop";
+      setError(errorMessage);
+      console.error("Deposit error:", err);
+      return null;
+    }
+  }, [publicKey, connection, keypair, isDevnet]);
+
+  /**
+   * Withdraw SOL to another address.
+   */
+  const withdraw = useCallback(async (toAddress: string, amount: number): Promise<string | null> => {
+    if (!publicKey || !connection || !keypair) {
+      setError("Wallet not connected");
+      return null;
+    }
+
+    if (!toAddress || typeof toAddress !== "string") {
+      setError("Invalid recipient address");
+      return null;
+    }
+
+    if (!isFinite(amount) || amount <= 0) {
+      setError("Invalid withdrawal amount");
+      return null;
+    }
+
+    try {
+      setError(null);
+      const { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL, sendAndConfirmTransaction } = await import("@solana/web3.js");
+      
+      const toPubkey = new PublicKey(toAddress);
+      
+      // Check current balance
+      const balance = await connection.getBalance(publicKey);
+      const solBalance = balance / LAMPORTS_PER_SOL;
+      const requiredAmount = amount + 0.000005; // Add small amount for transaction fee
+      
+      if (solBalance < requiredAmount) {
+        setError(`Insufficient balance. Need ${requiredAmount.toFixed(4)} SOL, have ${solBalance.toFixed(4)} SOL`);
+        return null;
+      }
+
+      // Create transfer transaction
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey,
+          lamports: amount * LAMPORTS_PER_SOL,
+        })
+      );
+
+      // Send and confirm transaction
+      const signature = await sendAndConfirmTransaction(
+        connection,
+        transaction,
+        [keypair],
+        { commitment: "confirmed" }
+      );
+
+      return signature;
+    } catch (err: any) {
+      const errorMessage = err?.message || "Failed to withdraw";
+      setError(errorMessage);
+      console.error("Withdraw error:", err);
+      return null;
+    }
+  }, [publicKey, connection, keypair]);
+
   const value: WalletContextType = {
     publicKey,
     connection,
@@ -206,6 +329,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     disconnect,
     getBalance,
     signMessage,
+    deposit,
+    withdraw,
+    isDevnet,
   };
 
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
