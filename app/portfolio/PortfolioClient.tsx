@@ -22,7 +22,12 @@ export function PortfolioClient() {
   // Load balance when connected
   useEffect(() => {
     if (connected && publicKey) {
-      getBalance().then(setBalance);
+      getBalance()
+        .then(setBalance)
+        .catch((err) => {
+          console.error("Failed to load balance:", err);
+          setBalance(null);
+        });
     } else {
       setBalance(null);
     }
