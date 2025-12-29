@@ -20,6 +20,11 @@ export function createTransferTransaction(
   toPubkey: PublicKey,
   amount: number
 ): Transaction {
+  // Validate amount is a positive finite number
+  if (!isFinite(amount) || amount <= 0) {
+    throw new Error("Transfer amount must be a positive number");
+  }
+
   const transaction = new Transaction().add(
     SystemProgram.transfer({
       fromPubkey,
