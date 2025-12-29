@@ -141,6 +141,11 @@ export class StrategyEngine {
     edge: number,
     template: StrategyTemplate
   ): number {
+    // Validate inputs
+    if (!isFinite(edge) || !isFinite(template.maxPositionSize) || !isFinite(template.minEdge) || template.minEdge <= 0) {
+      return 0;
+    }
+
     // Base position size from template
     let positionSize = template.maxPositionSize;
 
@@ -157,8 +162,9 @@ export class StrategyEngine {
 
     positionSize = positionSize * riskMultiplier;
 
-    // Cap at max position size
-    return Math.min(positionSize, template.maxPositionSize);
+    // Cap at max position size and ensure it's a valid number
+    const finalSize = Math.min(Math.max(0, positionSize), template.maxPositionSize);
+    return isFinite(finalSize) ? finalSize : 0;
   }
 
   /**
