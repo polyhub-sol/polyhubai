@@ -103,7 +103,7 @@ export function AgentManagerClient() {
                 <div>
                   <p className="text-[10px] text-ov-text-muted mb-1">Wallet Address</p>
                   <p className="font-mono text-sm text-ov-text">
-                    {publicKey?.toBase58().slice(0, 8)}...{publicKey?.toBase58().slice(-8)}
+                    {publicKey ? `${publicKey.toBase58().slice(0, 8)}...${publicKey.toBase58().slice(-8)}` : "N/A"}
                   </p>
                 </div>
                 <div className="text-right">
