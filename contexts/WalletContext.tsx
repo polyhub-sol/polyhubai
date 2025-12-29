@@ -150,7 +150,11 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     setKeypair(null);
     setPublicKey(null);
     if (typeof window !== "undefined") {
-      localStorage.removeItem("polyhub_wallet_keypair");
+      try {
+        localStorage.removeItem("polyhub_wallet_keypair");
+      } catch (err) {
+        console.error("Failed to remove wallet from storage:", err);
+      }
     }
     setError(null);
   }, []);
