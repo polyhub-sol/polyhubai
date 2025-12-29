@@ -102,6 +102,12 @@ export class PortfolioManager {
       return;
     }
 
+    // Validate exit price is a valid number
+    if (!isFinite(exitPrice) || exitPrice < 0 || exitPrice > 1) {
+      console.error("Invalid exit price:", exitPrice);
+      return;
+    }
+
     const pnl = this.calculatePnl(position.entryPrice, exitPrice, position.size, position.type);
     
     this.updatePosition(id, {
