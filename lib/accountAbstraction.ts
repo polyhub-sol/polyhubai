@@ -46,8 +46,24 @@ export async function getAccountBalance(
   connection: Connection,
   pubkey: PublicKey
 ): Promise<number> {
-  const balance = await connection.getBalance(pubkey);
-  return balance / LAMPORTS_PER_SOL;
+  if (!connection || !pubkey) {
+    throw new Error("Connection and public key are required");
+  }
+
+  try {
+    const balance = await connection.getBalance(pubkey);
+    const solBalance = balance / LAMPORTS_PER_SOL;
+    
+    // Ensure we return a valid finite number
+    if (!isFinite(solBalance) || solBalance < 0) {
+      return 0;
+    }
+    
+    return solBalance;
+  } catch (err) {
+    console.error("Failed to get account balance:", err);
+    return 0;
+  }
 }
 
 /**
@@ -80,9 +96,22 @@ export async function requestAirdrop(
   pubkey: PublicKey,
   amount: number = 1
 ): Promise<string> {
-  const signature = await connection.requestAirdrop(pubkey, amount * LAMPORTS_PER_SOL);
-  await connection.confirmTransaction(signature, "confirmed");
-  return signature;
+  if (!connection || !pubkey) {
+    throw new Error("Connection and public key are required");
+  }
+
+  if (!isFinite(amount) || amount <= 0) {
+    throw new Error("Airdrop amount must be a positive number");
+  }
+
+  try {
+    const signature = await connection.requestAirdrop(pubkey, amount * LAMPORTS_PER_SOL);
+    await connection.confirmTransaction(signature, "confirmed");
+    return signature;
+  } catch (err) {
+    console.error("Failed to request airdrop:", err);
+    throw err;
+  }
 }
 
 /**
