@@ -62,7 +62,7 @@ export class StrategyEngine {
     );
 
     // Check if we found a valid outcome
-    if (!bestOutcome.outcome || bestOutcome.edge === -Infinity) {
+    if (!bestOutcome.outcome || !isFinite(bestOutcome.edge) || bestOutcome.edge === -Infinity) {
       return {
         shouldExecute: false,
         reason: "No valid edge found for any outcome",
