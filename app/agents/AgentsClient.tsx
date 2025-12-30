@@ -85,7 +85,7 @@ export function AgentsClient() {
       },
     };
 
-    agentManager.createAgent(config, publicKey.toBase58());
+    const agent = agentManager.createAgent(config, publicKey.toBase58());
     loadAgents();
     
     // Reset form
@@ -104,7 +104,7 @@ export function AgentsClient() {
     
     setActiveTab("my-agents");
     alert(`Agent "${agent.name}" deployed successfully!`);
-  }, [connected, publicKey, deploymentConfig, agentManager]);
+  }, [connected, publicKey, deploymentConfig, agentManager, loadAgents]);
 
   const handleTest = useCallback(async (agentId: string) => {
     setTestingAgent(agentId);
@@ -149,7 +149,7 @@ export function AgentsClient() {
       setTestProgress(0);
       alert("Test completed! Check the results in My Agents.");
     }, 5000);
-  }, [agentManager, publicKey]);
+  }, [agentManager, publicKey, loadAgents]);
 
   const handleActivate = useCallback((agentId: string) => {
     if (agentManager.updateAgentStatus(agentId, "active")) {
