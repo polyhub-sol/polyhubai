@@ -58,12 +58,12 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       // Priority: localStorage override > env variable > default
-      let rpcUrl = typeof window !== "undefined" 
+      let rpcUrl: string | null = typeof window !== "undefined" 
         ? localStorage.getItem("polyhub_custom_rpc_url") 
         : null;
       
       if (!rpcUrl) {
-        rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL;
+        rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || null;
       }
       
       if (!rpcUrl) {
