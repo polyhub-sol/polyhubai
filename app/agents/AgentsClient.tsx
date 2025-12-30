@@ -149,7 +149,7 @@ export function AgentsClient() {
       setTestProgress(0);
       alert("Test completed! Check the results in My Agents.");
     }, 5000);
-  }, [agentManager, publicKey, loadAgents]);
+  }, [agentManager, loadAgents]);
 
   const handleActivate = useCallback((agentId: string) => {
     if (agentManager.updateAgentStatus(agentId, "active")) {

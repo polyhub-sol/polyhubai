@@ -14,6 +14,8 @@ export function WalletManagement() {
   const [depositing, setDepositing] = useState(false);
   const [withdrawing, setWithdrawing] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [showRpcSettings, setShowRpcSettings] = useState(false);
+  const [customRpcUrl, setCustomRpcUrl] = useState<string>("");
 
   const handleDeposit = async () => {
     if (!connected || !deposit) return;
