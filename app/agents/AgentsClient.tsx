@@ -38,17 +38,28 @@ export function AgentsClient() {
   const [listingAgent, setListingAgent] = useState<string | null>(null);
 
   // Load agents on mount and when wallet connects
-  useEffect(() => {
+  const loadAgents = useCallback(() => {
     if (connected && publicKey) {
-      const userAgents = agentManager.getAgentsByOwner(publicKey.toBase58());
+      // Create a new instance to reload from storage
+      const manager = new AgentManager();
+      const userAgents = manager.getAgentsByOwner(publicKey.toBase58());
       setAgents(userAgents);
     } else {
       setAgents([]);
     }
-  }, [connected, publicKey, agentManager]);
+  }, [connected, publicKey]);
 
-  // Load marketplace agents
-  const marketplaceAgents = agentManager.getMarketplaceAgents();
+  useEffect(() => {
+    loadAgents();
+  }, [loadAgents]);
+
+  // Load marketplace agents (refresh on tab change)
+  const [marketplaceAgents, setMarketplaceAgents] = useState<Agent[]>([]);
+  
+  useEffect(() => {
+    const manager = new AgentManager();
+    setMarketplaceAgents(manager.getMarketplaceAgents());
+  }, [activeTab]);
 
   const handleDeploy = useCallback(() => {
     if (!connected || !publicKey) {
@@ -74,8 +85,8 @@ export function AgentsClient() {
       },
     };
 
-    const agent = agentManager.createAgent(config, publicKey.toBase58());
-    setAgents([...agentManager.getAgentsByOwner(publicKey.toBase58())]);
+    agentManager.createAgent(config, publicKey.toBase58());
+    loadAgents();
     
     // Reset form
     setDeploymentConfig({
@@ -131,7 +142,7 @@ export function AgentsClient() {
           tradeHistory: [],
         });
         
-        setAgents([...agentManager.getAgentsByOwner(publicKey?.toBase58() || "")]);
+        loadAgents();
       }
       
       setTestingAgent(null);
@@ -142,17 +153,17 @@ export function AgentsClient() {
 
   const handleActivate = useCallback((agentId: string) => {
     if (agentManager.updateAgentStatus(agentId, "active")) {
-      setAgents([...agentManager.getAgentsByOwner(publicKey?.toBase58() || "")]);
+      loadAgents();
       alert("Agent activated!");
     }
-  }, [agentManager, publicKey]);
+  }, [agentManager, loadAgents]);
 
   const handlePause = useCallback((agentId: string) => {
     if (agentManager.updateAgentStatus(agentId, "paused")) {
-      setAgents([...agentManager.getAgentsByOwner(publicKey?.toBase58() || "")]);
+      loadAgents();
       alert("Agent paused!");
     }
-  }, [agentManager, publicKey]);
+  }, [agentManager, loadAgents]);
 
   const handleList = useCallback((agentId: string) => {
     const price = parseFloat(listingPrice);
@@ -162,12 +173,12 @@ export function AgentsClient() {
     }
 
     if (agentManager.listAgent(agentId, price)) {
-      setAgents([...agentManager.getAgentsByOwner(publicKey?.toBase58() || "")]);
+      loadAgents();
       setListingPrice("");
       setListingAgent(null);
       alert("Agent listed in marketplace!");
     }
-  }, [listingPrice, agentManager, publicKey]);
+  }, [listingPrice, agentManager, loadAgents]);
 
   const handleBuy = useCallback((agentId: string) => {
     if (!connected || !publicKey) {
@@ -182,10 +193,10 @@ export function AgentsClient() {
     }
 
     if (agentManager.sellAgent(agentId, publicKey.toBase58())) {
-      setAgents([...agentManager.getAgentsByOwner(publicKey.toBase58())]);
+      loadAgents();
       alert(`Agent "${agent.name}" purchased successfully!`);
     }
-  }, [connected, publicKey, agentManager]);
+  }, [connected, publicKey, agentManager, loadAgents]);
 
   const selectedTemplate = deploymentConfig.strategyTemplateId
     ? getStrategyTemplate(deploymentConfig.strategyTemplateId)
