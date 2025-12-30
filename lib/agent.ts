@@ -105,9 +105,66 @@ export interface AgentTestResult {
 
 /**
  * Agent Manager class for managing agent lifecycle.
+ * Persists agents to localStorage for client-side storage.
  */
 export class AgentManager {
   private agents: Map<string, Agent> = new Map();
+  private storageKey = "polyhub_agents";
+
+  constructor() {
+    this.loadFromStorage();
+  }
+
+  /**
+   * Load agents from localStorage.
+   */
+  private loadFromStorage(): void {
+    if (typeof window === "undefined") return;
+
+    try {
+      const stored = localStorage.getItem(this.storageKey);
+      if (stored) {
+        const agentsArray = JSON.parse(stored) as Agent[];
+        agentsArray.forEach((agent) => {
+          // Convert date strings back to Date objects
+          agent.createdAt = new Date(agent.createdAt);
+          agent.updatedAt = new Date(agent.updatedAt);
+          if (agent.deployedAt) {
+            agent.deployedAt = new Date(agent.deployedAt);
+          }
+          if (agent.testResults?.startDate) {
+            agent.testResults.startDate = new Date(agent.testResults.startDate);
+          }
+          if (agent.testResults?.endDate) {
+            agent.testResults.endDate = new Date(agent.testResults.endDate);
+          }
+          if (agent.marketplace?.listedAt) {
+            agent.marketplace.listedAt = new Date(agent.marketplace.listedAt);
+          }
+          if (agent.marketplace?.soldAt) {
+            agent.marketplace.soldAt = new Date(agent.marketplace.soldAt);
+          }
+          this.agents.set(agent.id, agent);
+        });
+      }
+    } catch (err) {
+      console.error("Failed to load agents from storage:", err);
+    }
+  }
+
+  /**
+   * Save agents to localStorage.
+   */
+  private saveToStorage(): void {
+    if (typeof window === "undefined") return;
+
+    try {
+      const agentsArray = Array.from(this.agents.values());
+      localStorage.setItem(this.storageKey, JSON.stringify(agentsArray));
+    } catch (err) {
+      console.error("Failed to save agents to storage:", err);
+    }
+  }
 
   /**
    * Create a new agent from a deployment config.
@@ -135,6 +192,7 @@ export class AgentManager {
     };
 
     this.agents.set(id, agent);
+    this.saveToStorage();
     return agent;
   }
 
@@ -193,6 +251,7 @@ export class AgentManager {
       agent.deployedAt = new Date();
     }
 
+    this.saveToStorage();
     return true;
   }
 
@@ -215,6 +274,7 @@ export class AgentManager {
     };
 
     agent.updatedAt = new Date();
+    this.saveToStorage();
     return true;
   }
 
@@ -234,6 +294,7 @@ export class AgentManager {
     };
 
     agent.updatedAt = new Date();
+    this.saveToStorage();
     return true;
   }
 
@@ -255,6 +316,7 @@ export class AgentManager {
     };
 
     agent.updatedAt = new Date();
+    this.saveToStorage();
     return true;
   }
 
@@ -270,6 +332,7 @@ export class AgentManager {
     }
 
     agent.updatedAt = new Date();
+    this.saveToStorage();
     return true;
   }
 
@@ -287,6 +350,7 @@ export class AgentManager {
     agent.ownerAddress = buyerAddress; // Transfer ownership
     agent.updatedAt = new Date();
 
+    this.saveToStorage();
     return true;
   }
 
@@ -294,7 +358,11 @@ export class AgentManager {
    * Delete an agent.
    */
   deleteAgent(id: string): boolean {
-    return this.agents.delete(id);
+    const deleted = this.agents.delete(id);
+    if (deleted) {
+      this.saveToStorage();
+    }
+    return deleted;
   }
 }
 

@@ -73,6 +73,13 @@ export default function RootLayout({
                 >
                   Agent Manager
                 </Link>
+                <Link
+                  href="/agents"
+                  title="Deploy, test, and sell trading agents"
+                  className="rounded-full border border-ov-border/75 bg-black/40 px-3 py-1.5 text-xs text-ov-text-muted hover:border-ov-accent hover:text-white hover:shadow-ov-glow transition-all"
+                >
+                  Agents
+                </Link>
               </nav>
             </div>
           </header>
