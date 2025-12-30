@@ -122,15 +122,8 @@ export function AgentManagerClient() {
                       ? `${balance.toFixed(4)} SOL` 
                       : balance === null 
                         ? "Loading..." 
-                        : balance === 0
-                          ? "0.0000 SOL (Rate limited)"
-                          : "Error"}
+                        : "Error"}
                   </p>
-                  {balance === 0 && (
-                    <p className="mt-1 text-[9px] text-ov-text-muted/70">
-                      RPC rate limited. Set NEXT_PUBLIC_SOLANA_RPC_URL for custom endpoint.
-                    </p>
-                  )}
                 </div>
               </div>
             </div>
